@@ -1,13 +1,16 @@
-import React from 'react';
-import { ButtonTag,Typo14WhiteRubikMedium } from './ButtonStylings';
+import React from 'react'
+import { ButtonTag } from './ButtonStylings'
 
 class Button extends React.Component {
-    render() {
-        const { buttonName,onClickLogin } = this.props;
-        return <ButtonTag onSubmit={onClickLogin}>
-        <Typo14WhiteRubikMedium>{buttonName}</Typo14WhiteRubikMedium>
-        </ButtonTag>;
-    }
+   render() {
+      const { buttonName, onClickLogin } = this.props
+      console.log('button when sumbit');
+      return (
+         <ButtonTag onClick={onClickLogin}>
+            {buttonName}
+         </ButtonTag>
+      )
+   }
 }
 
-export default Button;
+export default Button

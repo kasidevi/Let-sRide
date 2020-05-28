@@ -1,0 +1,16 @@
+{
+    "request": "Request",
+    "ride": "Ride",
+    "assetTransport": "Asset Transport",
+    "share": "Share",
+    "travelInfo":"Travel info",
+    
+    "rideRequest": "RIDE REQUEST",
+    "form": "FROM",
+    "to": "TO",
+    "select": "Select",
+    "noOfSeats": "No.of seats",
+    "laguageQuantity": "LAGUAGE QUANTITY",
+    "requestForButton": "REQUEST"
+    
+}
