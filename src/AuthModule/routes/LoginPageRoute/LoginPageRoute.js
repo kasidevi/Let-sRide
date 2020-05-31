@@ -2,7 +2,7 @@ import React from 'react'
 import { observer, inject } from 'mobx-react'
 import { observable } from 'mobx'
 import LoginPage from '../../components/LoginPage/index';
-import {withRouter} from 'react-router';
+import { withRouter } from 'react-router';
 
 @observer
 class LoginPageRoute extends React.Component {
@@ -10,35 +10,35 @@ class LoginPageRoute extends React.Component {
    @observable password
    @observable errorMessage
    constructor(props) {
-      super(props)
-      this.username = ''
-      this.password = ''
-      this.errorMessage = ''
+      super(props);
+      this.username = '';
+      this.password = '';
+      this.errorMessage = '';
    }
 
    onChangeUsername = event => {
       if (event.target.value.trim !== '') {
-         this.username = event.target.value
+         this.username = event.target.value;
       }
    }
 
    onChangePassword = event => {
       if (event.target.value.trim !== '') {
-         this.password = event.target.value
+         this.password = event.target.value;
       }
    }
 
    onClickLogin = event => {
       if (this.username === '') {
-         this.errorMessage = 'Please enter username'
+         this.errorMessage = 'Please enter username';
       }
       else if (this.password === '') {
-         this.errorMessage = 'Please enter password'
+         this.errorMessage = 'Please enter password';
       }
       else {
          //this.props.authStore.userSignIn();
          let { history } = this.props;
-         history.push('/ride-form');
+         history.push('/home-screen');
       }
    }
 

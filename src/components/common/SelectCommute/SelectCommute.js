@@ -8,7 +8,7 @@ class SelectCommute extends React.Component {
     }
     render() {
         return (<Div>
-    <Select >{this.onChange()}</Select>
+    <Select onChange={this.onChange}>{this.onChange()}</Select>
     </Div>);
     }
 }

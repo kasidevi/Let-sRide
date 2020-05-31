@@ -1,20 +1,19 @@
-import React from 'react'
-import { Div, InputTag } from './InputFieldStylings'
+import React from 'react';
+import { Div, InputTag } from './stylings';
 
 class InputField extends React.Component {
    render() {
-      const { type, value, onChangeInputText } = this.props
-      console.log('input feild');
+      const { type, defaultValue, onChangeInputText } = this.props;
       return (
          <Div>
             <InputTag
                onChange={onChangeInputText}
                type={type}
-               value={value}
+               value={defaultValue}
             />
          </Div>
-      )
+      );
    }
 }
 
-export default InputField
+export default InputField;

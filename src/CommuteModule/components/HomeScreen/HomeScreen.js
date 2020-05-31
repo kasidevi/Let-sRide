@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { Header, Image, HeaderLeftPart } from './stylings';
 
 import SelectCommute from '../../../components/common/SelectCommute/index.js';
+import RideRequest from '../RideRequest/index';
 
 @observer
 class HomeScreen extends React.Component {
@@ -50,13 +51,22 @@ class HomeScreen extends React.Component {
         <Header>
         <Image src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/4c19d175-fb00-4139-b427-5f8613891b3d.svg" alt="logo"/>
         <HeaderLeftPart>
-        <SelectCommute options={this.props.requestOptions}/>
-        <SelectCommute options={this.props.shareOptions}/>
+        <p>request</p>
+        <p>share</p>
         </HeaderLeftPart>
         </Header>
+        <RideRequest/>
         </div>);
     }
 
 }
 
 export default HomeScreen;
+
+
+
+/*
+   <SelectCommute onChangeRequest={this.onChangeRequest} options={this.props.requestOptions}/>
+        <SelectCommute onChangeShare={this.onChangeShare} options={this.props.shareOptions}/>
+     
+*/

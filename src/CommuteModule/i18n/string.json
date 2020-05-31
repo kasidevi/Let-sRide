@@ -3,14 +3,29 @@
     "ride": "Ride",
     "assetTransport": "Asset Transport",
     "share": "Share",
-    "travelInfo":"Travel info",
-    
+    "travelInfo": "Travel info",
+
     "rideRequest": "RIDE REQUEST",
-    "form": "FROM",
+    "from": "FROM",
     "to": "TO",
     "select": "Select",
-    "noOfSeats": "No.of seats",
+    "noOfSeats": "NO.OF SEATS",
     "laguageQuantity": "LAGUAGE QUANTITY",
-    "requestForButton": "REQUEST"
-    
+    "requestForButton": "REQUEST",
+    "dateAndTime": "DATE AND TIME",
+
+    "flexibleTimings": "FLEXIBLE TIMINGS",
+    "ShareRide": "SHARE RIDE",
+
+    "assetTransportRequest": "ASSET TRANSPORT REQUEST",
+    "assetType": "ASSET TYPE",
+    "others": "OTHERS",
+    "assetSensitivity": "ASSET SENSITIVITY",
+    "whomToDeliver": "WHOM TO DELIVER",
+
+    "shareTravelInfo": "SHARE TRAVEL INFO",
+    "travelMedium": "TRAVEL MEDIUM",
+    "assetsQuantity": "ASSETS QUANTITY",
+    "shareForButton": "SHARE"
+
 }

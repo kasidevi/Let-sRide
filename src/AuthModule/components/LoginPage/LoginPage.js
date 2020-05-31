@@ -1,21 +1,22 @@
-import React from 'react'
-import { observable } from 'mobx'
-import { observer } from 'mobx-react'
+import React from 'react';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 
-import InputField from '../../../components/common/InputField/index'
-import Button from '../../../components/common/Buttons/index'
-import LoadingWrapperWithFailure from '../../../components/common/LoadingWrapperWithFailure/index'
+import InputField from '../../../components/common/InputField/index';
+import Button from '../../../components/common/Buttons/index';
 
-import StrigsData from '../../i18n/string.json'
+import StringsData from '../../i18n/string.json';
 
 import {
    Header,
    UserName,
    Password,
    Div,
-   Image
+   MainDiv,
+   Image,
+   ErrorMessage
 }
-from './stylings'
+from './stylings';
 
 @observer
 class LoginPage extends React.Component {
@@ -24,10 +25,10 @@ class LoginPage extends React.Component {
    @observable errorMessage
 
    constructor(props) {
-      super(props)
-      this.username = ''
-      this.password = ''
-      this.errorMessage = ''
+      super(props);
+      this.username = '';
+      this.password = '';
+      this.errorMessage = '';
    }
 
    render() {
@@ -40,32 +41,38 @@ class LoginPage extends React.Component {
          password
       } = this.props;
       return (
+         <MainDiv>
          <Div>
             <Image
                src='https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/d1119fe1-4f3a-40fd-860b-3adee7ca7915.svg'
                alt='ibhubs Logo'
             />
             <Header>
-               {StrigsData.HiThereLogin}
+               {StringsData.hiThereLogin}
             </Header>
             <UserName>
-               {StrigsData.UserName}
+               {StringsData.userName}
             </UserName>
+            
             <InputField
                onChangeInputText={onChangeUsername}
                type='text'
                defaultValue={username}
             />
             <Password>
-               {StrigsData.Password}
+               {StringsData.password}
             </Password>
             <InputField
                onChangeInputText={onChangePassword}
                type='password'
                defaultValue={password}
             />
-            <Button onClickLogin={onClickLogin} buttonName={StrigsData.Login} />
+            
+            <Button onClickLogin={onClickLogin} buttonName={StringsData.login} />
+            <ErrorMessage>{errorMessage}</ErrorMessage>
+           
          </Div>
+         </MainDiv>
       );
    }
 }

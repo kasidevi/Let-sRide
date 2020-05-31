@@ -1,10 +1,10 @@
 {
-    "UserName": "USERNAME",
-    "MobileNumber": "MOBILENUMBER",
-    "Password": "PASSWORD",
-    "ConfirmPassword": "CONFIRM PASSWORD",
-    "HiTherePleaseSignUp": "Hi there, please sign up",
-    "DeathStarConstrction": "Death Star Constrction",
-    "Login": "LOGIN",
-    "HiThereLogin": "Hi there, login"
+    "userName": "USERNAME",
+    "mobileNumber": "MOBILENUMBER",
+    "password": "PASSWORD",
+    "confirmPassword": "CONFIRM PASSWORD",
+    "hiTherePleaseSignUp": "Hi there, please sign up",
+    "deathStarConstrction": "Death Star Constrction",
+    "login": "LOGIN",
+    "hiThereLogin": "Hi there, login"
 }
