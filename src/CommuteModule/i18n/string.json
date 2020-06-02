@@ -26,6 +26,9 @@
     "shareTravelInfo": "SHARE TRAVEL INFO",
     "travelMedium": "TRAVEL MEDIUM",
     "assetsQuantity": "ASSETS QUANTITY",
-    "shareForButton": "SHARE"
+    "shareForButton": "SHARE",
 
+    "noOfPeople": "NO.OF PEOPLE",
+    "acceptedPersonDetails": "ACCEPTED PERSON DETAILS",
+    "status": "STATUS"
 }

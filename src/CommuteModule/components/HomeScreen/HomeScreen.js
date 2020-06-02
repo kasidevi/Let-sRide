@@ -1,9 +1,9 @@
 import React from 'react';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Header, Image, HeaderLeftPart } from './stylings';
+import { Div, Header, Image, HeaderLeftPart, UpArrow, DownArrow } from './stylings';
 
-import SelectCommute from '../../../components/common/SelectCommute/index.js';
+import DropDown from '../../../components/common/DropDown/index.js';
 import RideRequest from '../RideRequest/index';
 
 @observer
@@ -13,31 +13,42 @@ class HomeScreen extends React.Component {
     @observable isRequest
     @observable requsetOptions
     @observable shareOptions
+
     constructor(props) {
         super(props);
         this.request = 'Ride';
         this.share = 'Ride';
         this.requestComponent = 'RideRequest';
         this.shareComponent = 'ShareRide';
-        this.isRequest = true;
+        this.isRequest = false;
+        this.isShare = false;
         this.requestOptions = ['Ride', 'AssetTransport'];
         this.shareOptions = ['Ride', 'TravelInfo'];
     }
 
+    isRequestBooleanFunction = () => {
+        this.isRequest = !this.isRequest;
+        this.isShare = false;
+    }
+
+    isShareBooleanFunction = () => {
+        this.isShare = !this.isShare;
+        this.isRequest = false;
+    }
+
     onChangeRequest = (event) => {
         this.request = event.target.value;
-        this.isRequest = true;
         if (this.request === 'Ride') {
             this.requestComponent = 'RideRequest';
         }
         else if (this.request === 'AssetTransport') {
             this.requestComponent = 'AssetTransportRequest';
         }
+        console.log('onChangeRequest', this.request, this.requestComponent)
     }
 
     onChangeShare = (event) => {
         this.share = event.target.value;
-        this.isRequest = false;
         if (this.share === 'Ride') {
             this.shareComponent = 'ShareRide';
         }
@@ -46,27 +57,34 @@ class HomeScreen extends React.Component {
         }
     }
 
+
     render() {
         return (<div>
-        <Header>
-        <Image src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/4c19d175-fb00-4139-b427-5f8613891b3d.svg" alt="logo"/>
-        <HeaderLeftPart>
-        <p>request</p>
-        <p>share</p>
-        </HeaderLeftPart>
-        </Header>
-        <RideRequest/>
+                <Header>
+                    <Image src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/4c19d175-fb00-4139-b427-5f8613891b3d.svg" alt="logo"/>
+                   
+                    <HeaderLeftPart>
+                    
+                    <Div onClick={this.isRequestBooleanFunction} booleanValue={this.isRequest}>
+                    Request{this.isRequest?
+                    <UpArrow src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/a536824b-2c3c-4311-8f69-d3296db3ccfc.svg" alt="UpArrow" />:
+                    <DownArrow src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/655725ee-733a-4085-afcc-1c88795d2164.svg" alt="DownArrow" /> }
+                    </Div>
+                    { this.isRequest ? <DropDown data={this.requestOptions} onRequest={this.onChangeRequest}/> : '' }
+                    
+                    <Div onClick={this.isShareBooleanFunction} booleanValue={this.isShare}>
+                    Share{this.isShare?
+                    <UpArrow src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/a536824b-2c3c-4311-8f69-d3296db3ccfc.svg" alt="UpArrow" />:
+                    <DownArrow src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/655725ee-733a-4085-afcc-1c88795d2164.svg" alt="DownArrow" /> }
+                    </Div>
+                    
+                    </HeaderLeftPart>
+                    
+                </Header>
+                <RideRequest/>
         </div>);
     }
 
 }
 
 export default HomeScreen;
-
-
-
-/*
-   <SelectCommute onChangeRequest={this.onChangeRequest} options={this.props.requestOptions}/>
-        <SelectCommute onChangeShare={this.onChangeShare} options={this.props.shareOptions}/>
-     
-*/

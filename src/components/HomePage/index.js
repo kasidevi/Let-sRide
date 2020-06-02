@@ -19,14 +19,14 @@ class HomePage extends React.Component {
             >
                Learn React
             </a>
-            <Link to='/page-1'>Page 1</Link>
             <Link to='/LoginPage'>Let's Ride</Link>
-            <Link to='/counter'> counter page </Link>
             <Link to='/home-screen'>Home Screen</Link>
             <Link to='/ride-from'>Ride Request</Link>
             <Link to='/share-ride'>Share Ride</Link>
             <Link to='/asset-transport-request'>Asset Transport Request</Link>
             <Link to='/share-travel-info'>Share Travel Info</Link>
+            <Link to='/user-mini-profile'>User Mini Profile</Link>
+            <Link to='/user-requests'>User Requests</Link>
             
          </header>
       </div>

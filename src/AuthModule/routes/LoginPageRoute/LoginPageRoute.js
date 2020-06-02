@@ -15,7 +15,7 @@ class LoginPageRoute extends React.Component {
       this.password = '';
       this.errorMessage = '';
    }
-
+   
    onChangeUsername = event => {
       if (event.target.value.trim !== '') {
          this.username = event.target.value;

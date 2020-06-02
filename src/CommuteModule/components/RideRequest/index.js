@@ -1,2 +1,2 @@
-import RideRequest from './RideRequest';
+import {RideRequest} from './RideRequest';
 export default RideRequest;

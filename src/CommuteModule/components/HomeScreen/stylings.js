@@ -9,6 +9,29 @@ const Image = styled.img `
   object-fit: contain;
 `;
 
-const HeaderLeftPart = styled.div ``;
+const UpArrow = styled.img `
+  object-fit:contain;
+  width:16px;
+  height:16px;
+`;
 
-export { Header, Image, HeaderLeftPart };
+
+const DownArrow = styled.img `
+  object-fit:contain;
+  width:16px;
+  height:16px;
+`;
+
+const Div = styled.div `
+  display:flex; 
+  color:${props =>props.booleanValue?'#0b69ff':'#171f46'};
+  align-items:center;
+`;
+
+const HeaderLeftPart = styled.div `
+display:flex;
+justify-content:space-between;
+width:150px;
+`;
+
+export { Div, Header, Image, HeaderLeftPart, UpArrow, DownArrow };

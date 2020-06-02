@@ -2,14 +2,14 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import HomePage from './components/HomePage'
-import Page1 from './components/Page1'
 import LoginPageRoute from './AuthModule/routes/LoginPageRoute/index'
-import CounterPage from './components/common/CounterPage/index'
 import HomeScreen from './CommuteModule/components/HomeScreen/index.js'
 import RideRequest from './CommuteModule/components/RideRequest/index.js'
 import ShareRide from './CommuteModule/components/ShareRide/index.js'
 import AssetTransportRequest from './CommuteModule/components/AssetTransportRequest/index.js'
 import ShareTravelInfo from './CommuteModule/components/ShareTravelInfo/index.js'
+import UserMiniProfile from './CommuteModule/components/UserMiniProfile/index.js'
+import UserRequests from './CommuteModule/components/UserRequests/index.js'
 
 import './App.css'
 
@@ -20,10 +20,6 @@ class App extends React.Component {
             <Switch>
                <Route exact path='/LoginPage'>
                   <LoginPageRoute />
-               </Route>
-
-               <Route exact path='/counter'>
-                  <CounterPage />
                </Route>
 
                <Route exact path='/home-screen'>
@@ -46,8 +42,11 @@ class App extends React.Component {
                   <ShareTravelInfo />
                </Route>
 
-               <Route exact path='/page-1'>
-                  <Page1 />
+               <Route exact path='/user-mini-profile'>
+                  <UserMiniProfile />
+               </Route>
+               <Route exact path='/user-requests'>
+                  <UserRequests />
                </Route>
 
                <Route path='/'>
