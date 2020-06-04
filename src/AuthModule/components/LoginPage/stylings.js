@@ -7,8 +7,8 @@ import {
 from '../../../styleGuide/Typos/index';
 
 const MainDiv = styled.div `background-color:#f1f7ff;
-padding-top:100px;
-padding-bottom:100px`;
+   padding-top:100px;
+   padding-bottom:100px`;
 
 const Div = styled.div `
    width: 536px;
@@ -22,6 +22,11 @@ const Div = styled.div `
    margin:auto;
 `;
 
+const DivFlexColumn = styled.div `
+   padding-bottom:10px;
+   padding-top:10px;
+`;
+
 const Image = styled.img `
    width: 90px;
    height: 90px;
@@ -31,9 +36,15 @@ const Image = styled.img `
 const Header = Typo32RubikRegular;
 const UserName = Typo12HKGroteskSemiBoldSteel;
 const Password = Typo12HKGroteskSemiBoldSteel;
-const ErrorMessage = styled.p `${tw`text-red-500 text-xs`}
- margin-left:-200px;
- `;
+
+const ErrorMessage = styled.p `${tw`text-red-500 text-xs`}`;
+
+const DontHaveAccount = styled.div `${tw`pt-4 flex items-center`}`;
+
+const AnchorTag = styled.div `
+   padding-left:5px;
+   color:#0b69ff;
+`;
 
 export {
    Header,
@@ -41,6 +52,9 @@ export {
    Password,
    MainDiv,
    Div,
+   DivFlexColumn,
    Image,
-   ErrorMessage
+   ErrorMessage,
+   DontHaveAccount,
+   AnchorTag
 };

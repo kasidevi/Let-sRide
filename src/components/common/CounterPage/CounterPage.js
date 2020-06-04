@@ -12,14 +12,20 @@ class CounterPage extends React.Component {
             this.count = 0;
         }
         this.count++;
+        this.props.counterValue(this.count);
     }
     onDecrement = () => {
         if (this.count > 0) {
             this.count--;
         }
+        else if (this.count < 0) {
+            this.count = 0;
+        }
+        this.props.counterValue(this.count);
     }
     onChangeCount = (event) => {
         this.count = event.target.value;
+        this.props.counterValue(this.count);
         return this.count;
     }
     render() {

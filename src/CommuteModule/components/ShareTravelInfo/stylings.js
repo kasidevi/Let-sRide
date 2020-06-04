@@ -44,6 +44,11 @@ const Div = styled.div `
     align-items:center;
 `;
 
+const DivWithFlexCol = styled.div `
+    padding-top:10px;
+    padding-bottom:10px;
+`;
+
 const FlexibleTimingsLabel = styled.label `
    font-family: HKGrotesk;
    font-size: 12px;
@@ -60,6 +65,11 @@ const Requried = styled.span `
     padding-right:10px;
 `;
 
+const RequriedText = styled.p `
+    color:red;
+    font-size:10px;
+`;
+
 const Title = Typo20DarkBlueGreyHKGrotestBold;
 const From = Typo12HKGroteskSemiBoldSteel;
 const To = Typo12HKGroteskSemiBoldSteel;
@@ -73,8 +83,10 @@ export {
     ShareTravelInfoFromBody,
     DivForFlexibleTimings,
     Div,
+    DivWithFlexCol,
     FlexibleTimingsLabel,
     Requried,
+    RequriedText,
     Title,
     From,
     To,

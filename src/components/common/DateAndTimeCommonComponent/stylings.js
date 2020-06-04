@@ -12,7 +12,7 @@ const To = Typo12HKGroteskSemiBoldSteel;
 
 const Input = styled.input `
     width:150px;
-    height:40px;
+    height:30px;
     border-radius: 2px;
     border: solid 1px #7e858e;
     background-color: #ffffff;

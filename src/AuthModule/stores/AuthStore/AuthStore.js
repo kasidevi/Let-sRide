@@ -43,7 +43,7 @@ class AuthStore {
    }
 
    @action.bound
-   userSignOut() {}
+   userLogOut() {}
 
    @action
    init() {

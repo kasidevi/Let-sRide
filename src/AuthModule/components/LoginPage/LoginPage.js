@@ -12,66 +12,75 @@ import {
    UserName,
    Password,
    Div,
+   DivFlexColumn,
    MainDiv,
    Image,
-   ErrorMessage
+   ErrorMessage,
+   DontHaveAccount,
+   AnchorTag
 }
 from './stylings';
 
 @observer
 class LoginPage extends React.Component {
-   @observable username
-   @observable password
-   @observable errorMessage
-
-   constructor(props) {
-      super(props);
-      this.username = '';
-      this.password = '';
-      this.errorMessage = '';
-   }
 
    render() {
+
       const {
          onChangeUsername,
          onChangePassword,
          onClickLogin,
-         errorMessage,
+         errorMessageForPassword,
+         errorMessageForUsername,
+         isUserNameEmpty,
+         isPassWordEmpty,
          username,
          password
       } = this.props;
+
       return (
          <MainDiv>
-         <Div>
-            <Image
-               src='https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/d1119fe1-4f3a-40fd-860b-3adee7ca7915.svg'
-               alt='ibhubs Logo'
-            />
-            <Header>
-               {StringsData.hiThereLogin}
-            </Header>
-            <UserName>
-               {StringsData.userName}
-            </UserName>
-            
-            <InputField
-               onChangeInputText={onChangeUsername}
-               type='text'
-               defaultValue={username}
-            />
-            <Password>
-               {StringsData.password}
-            </Password>
-            <InputField
-               onChangeInputText={onChangePassword}
-               type='password'
-               defaultValue={password}
-            />
-            
-            <Button onClickLogin={onClickLogin} buttonName={StringsData.login} />
-            <ErrorMessage>{errorMessage}</ErrorMessage>
-           
-         </Div>
+            <Div>
+               <Image
+                  src='https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/d1119fe1-4f3a-40fd-860b-3adee7ca7915.svg'
+                  alt='ibhubs Logo'
+               />
+               <Header>
+                  {StringsData.hiThereLogin}
+               </Header>
+               
+               <DivFlexColumn>
+                     <UserName>
+                        {StringsData.userName}
+                     </UserName>
+                     <InputField
+                        onChangeInputText={onChangeUsername}
+                        type='text'
+                        defaultValue={username}
+                        isFeildEmpty={isUserNameEmpty}
+                     />
+                     {isUserNameEmpty?<ErrorMessage>{errorMessageForUsername}</ErrorMessage>:''}
+               </DivFlexColumn>
+               
+               <DivFlexColumn>
+                     <Password>
+                        {StringsData.password}
+                     </Password>
+                     <InputField
+                        onChangeInputText={onChangePassword}
+                        type='password'
+                        defaultValue={password}
+                        isFeildEmpty={isPassWordEmpty}
+                     />
+                     {isPassWordEmpty?<ErrorMessage>{errorMessageForPassword}</ErrorMessage>:''}
+               </DivFlexColumn>
+               
+               <Button onSubmitButton={onClickLogin} buttonName={StringsData.login} />
+               
+               <DontHaveAccount>{StringsData.dontHaveAnAccount} <AnchorTag>{StringsData.signUp}</AnchorTag></DontHaveAccount>
+               
+               
+            </Div>
          </MainDiv>
       );
    }

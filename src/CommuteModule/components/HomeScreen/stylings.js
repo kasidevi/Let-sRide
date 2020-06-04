@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import tw from 'tailwind.macro';
 
-const Header = styled.div `${tw`flex justify-between bg-white`}`;
+const Header = styled.div `${tw`flex justify-between bg-white`}
+
+position:relative`;
 
 const Image = styled.img `
   width: 71px;

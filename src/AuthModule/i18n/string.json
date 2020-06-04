@@ -6,5 +6,7 @@
     "hiTherePleaseSignUp": "Hi there, please sign up",
     "deathStarConstrction": "Death Star Constrction",
     "login": "LOGIN",
-    "hiThereLogin": "Hi there, login"
+    "hiThereLogin": "Hi there, login",
+    "dontHaveAnAccount": "Don’t have an account? ",
+    "signUp": "SignUp"
 }

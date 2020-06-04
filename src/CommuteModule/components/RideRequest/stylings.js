@@ -6,6 +6,7 @@ const MainDiv = styled.div `
     background-color:#d7dfe9;
     padding-top:100px;
     padding-bottom:100px;
+    height:100%;
 `;
 
 const RideRequestFrom = styled.div `

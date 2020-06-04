@@ -4,42 +4,65 @@ import { observable } from 'mobx'
 import LoginPage from '../../components/LoginPage/index';
 import { withRouter } from 'react-router';
 
+@inject('authStore')
 @observer
 class LoginPageRoute extends React.Component {
    @observable username
    @observable password
-   @observable errorMessage
+   @observable errorMessageForUsername
+   @observable errorMessageForPassword
+   @observable isUserNameEmpty
+   @observable isPassWordEmpty
    constructor(props) {
       super(props);
       this.username = '';
       this.password = '';
-      this.errorMessage = '';
+      this.errorMessageForUsername = '';
+      this.errorMessageForPassword = '';
+      this.isUserNameEmpty = false;
+      this.isPassWordEmpty = false;
    }
-   
+
    onChangeUsername = event => {
       if (event.target.value.trim !== '') {
          this.username = event.target.value;
+         this.isUserNameEmpty = false;
+      }
+      else {
+         this.isUserNameEmpty = true;
       }
    }
+
 
    onChangePassword = event => {
       if (event.target.value.trim !== '') {
          this.password = event.target.value;
+         this.isPassWordEmpty = false;
+      }
+      else {
+         this.isPassWordEmpty = true;
       }
    }
 
+
    onClickLogin = event => {
+
       if (this.username === '') {
-         this.errorMessage = 'Please enter username';
+         this.errorMessageForUsername = 'Please enter username';
+         this.isUserNameEmpty = true;
       }
-      else if (this.password === '') {
-         this.errorMessage = 'Please enter password';
+
+      if (this.password === '') {
+         this.errorMessageForPassword = 'Please enter password';
+         this.isPassWordEmpty = true;
       }
-      else {
-         //this.props.authStore.userSignIn();
-         let { history } = this.props;
+
+      else if (this.username !== '' && this.password !== '') {
+         this.props.authStore.userLogIn();
+         const { history } = this.props;
          history.push('/home-screen');
       }
+
    }
 
    render() {
@@ -48,11 +71,12 @@ class LoginPageRoute extends React.Component {
             onChangeUsername={this.onChangeUsername}
             onChangePassword={this.onChangePassword}
             onClickLogin={this.onClickLogin}
-            errorMessage={this.errorMessage}
+            errorMessageForUsername={this.errorMessageForUsername}
+            errorMessageForPassword={this.errorMessageForPassword}
             username={this.username}
             password={this.password}
-            // getUserSignInAPIError={this.props.authStore.getUserSignInAPIError}
-            // getUserSignInAPIStatus ={this.props.authStore.getUserSignInAPIStatus}
+            isUserNameEmpty={this.isUserNameEmpty}
+            isPassWordEmpty={this.isPassWordEmpty}
          />
       );
    }

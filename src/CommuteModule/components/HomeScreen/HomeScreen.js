@@ -8,11 +8,16 @@ import RideRequest from '../RideRequest/index';
 
 @observer
 class HomeScreen extends React.Component {
+
     @observable renderPage
-    @observable component
+    @observable shareComponent
+    @observable requestComponent
     @observable isRequest
-    @observable requsetOptions
+    @observable isShare
+    @observable requestOptions
     @observable shareOptions
+    @observable request
+    @observable share
 
     constructor(props) {
         super(props);
@@ -22,8 +27,8 @@ class HomeScreen extends React.Component {
         this.shareComponent = 'ShareRide';
         this.isRequest = false;
         this.isShare = false;
-        this.requestOptions = ['Ride', 'AssetTransport'];
-        this.shareOptions = ['Ride', 'TravelInfo'];
+        this.requestOptions = ['Ride', 'Asset Transport'];
+        this.shareOptions = ['Ride', 'Travel Info'];
     }
 
     isRequestBooleanFunction = () => {
@@ -37,14 +42,14 @@ class HomeScreen extends React.Component {
     }
 
     onChangeRequest = (event) => {
-        this.request = event.target.value;
+        this.request = event;
         if (this.request === 'Ride') {
             this.requestComponent = 'RideRequest';
         }
         else if (this.request === 'AssetTransport') {
             this.requestComponent = 'AssetTransportRequest';
         }
-        console.log('onChangeRequest', this.request, this.requestComponent)
+        console.log('onChangeRequest', this.request, this.requestComponent);
     }
 
     onChangeShare = (event) => {
@@ -77,6 +82,7 @@ class HomeScreen extends React.Component {
                     <UpArrow src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/a536824b-2c3c-4311-8f69-d3296db3ccfc.svg" alt="UpArrow" />:
                     <DownArrow src="https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/655725ee-733a-4085-afcc-1c88795d2164.svg" alt="DownArrow" /> }
                     </Div>
+                    { this.isShare ? <DropDown data={this.shareOptions} onRequest={this.onChangeShare}/> : '' }
                     
                     </HeaderLeftPart>
                     

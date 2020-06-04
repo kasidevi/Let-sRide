@@ -15,11 +15,11 @@ const InputText = styled.input `
   border-top: solid 1px #d7dfe9;
   border-bottom: solid 1px #d7dfe9;
   background-color: #ffffff;
-  align-items:center;
+  text-align:center;
  `;
 
 export {
-    Increment,
-    Decrement,
-    InputText
+  Increment,
+  Decrement,
+  InputText
 };

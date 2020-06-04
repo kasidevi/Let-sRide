@@ -3,9 +3,9 @@ import { ButtonTag } from './ButtonStylings';
 
 class Button extends React.Component {
    render() {
-      const { buttonName, onClickLogin } = this.props;
+      const { buttonName, onSubmitButton } = this.props;
       return (
-         <ButtonTag onClick={onClickLogin}>
+         <ButtonTag onClick={onSubmitButton}>
             {buttonName}
          </ButtonTag>
       );

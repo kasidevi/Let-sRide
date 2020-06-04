@@ -41,6 +41,11 @@ const Div = styled.div `
     align-items:center;
 `;
 
+const DivWithFlexCol = styled.div `
+    padding-top:10px;
+    padding-bottom:10px;
+`;
+
 const FlexibleTimingsLabel = styled.label `
    font-family: HKGrotesk;
    font-size: 12px;
@@ -55,6 +60,11 @@ const FlexibleTimingsLabel = styled.label `
 const Requried = styled.span `
     color:red;
     padding-right:10px;
+`;
+
+const RequriedText = styled.p `
+    color:red;
+    font-size:10px;
 `;
 
 const Title = Typo20DarkBlueGreyHKGrotestBold;
@@ -72,8 +82,10 @@ export {
     AssetTransportRequestFormBody,
     DivForFlexibleTimings,
     Div,
+    DivWithFlexCol,
     FlexibleTimingsLabel,
     Requried,
+    RequriedText,
     Title,
     From,
     To,
