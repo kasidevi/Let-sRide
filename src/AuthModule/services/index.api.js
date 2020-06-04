@@ -1,23 +1,27 @@
-import { create } from 'apisauce'
-import { networkCallWithApisauce } from '../../utils/APIUtils'
-import { apiMethods } from '../../constants/APIConstants'
+import { create } from 'apisauce';
+import { networkCallWithApisauce } from '../../utils/APIUtils';
+import { apiMethods } from '../../constants/APIConstants';
 
 class AuthService {
    api
    constructor() {
       this.api = create({
-         baseURL: 'https://5ea1a14db9f5ca00166c1f27.mockapi.io/api/'
-      })
+         baseURL: 'https://4015ee346b19.ngrok.io'
+      });
    }
 
-   logInAPI() {
+   logInAPI(mobileNumber, password) {
+      const details = {
+         mobile_number: mobileNumber,
+         password: password
+      }
+
       return networkCallWithApisauce(
          this.api,
-         '/LoginPage',
-         {},
+         '/api/lets_ride/LogIn/v1/', details,
          apiMethods.post
-      )
+      );
    }
 }
 
-export default AuthService
+export default AuthService;

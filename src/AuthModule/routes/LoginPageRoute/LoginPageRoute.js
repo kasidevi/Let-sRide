@@ -27,7 +27,8 @@ class LoginPageRoute extends React.Component {
       if (event.target.value.trim !== '') {
          this.username = event.target.value
          this.isUserNameEmpty = false
-      } else {
+      }
+      else {
          this.isUserNameEmpty = true
       }
    }
@@ -36,12 +37,13 @@ class LoginPageRoute extends React.Component {
       if (event.target.value.trim !== '') {
          this.password = event.target.value
          this.isPassWordEmpty = false
-      } else {
+      }
+      else {
          this.isPassWordEmpty = true
       }
    }
 
-   onClickLogin = event => {
+   onClickLogin = (event) => {
       if (this.username === '') {
          this.errorMessageForUsername = 'Please enter username'
          this.isUserNameEmpty = true
@@ -50,11 +52,23 @@ class LoginPageRoute extends React.Component {
       if (this.password === '') {
          this.errorMessageForPassword = 'Please enter password'
          this.isPassWordEmpty = true
-      } else if (this.username !== '' && this.password !== '') {
-         this.props.authStore.userLogIn()
+      }
+      else if (this.username !== '' && this.password !== '') {
+         this.logIn(this.username, this.password)
+      }
+   }
+   async logIn(username, password) {
+
+      const { authStore: { userLogIn } } = this.props;
+
+      await userLogIn(username, password);
+      const { authStore: { access_token } } = this.props;
+
+      if (access_token) {
          const { history } = this.props
          history.push('/home-screen')
       }
+
    }
 
    render() {
