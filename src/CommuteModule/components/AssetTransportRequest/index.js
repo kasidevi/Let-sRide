@@ -1,2 +1,2 @@
-import { AssetTransportRequest } from './AssetTransportRequest';
-export default AssetTransportRequest;
+import { AssetTransportRequest } from './AssetTransportRequest'
+export default AssetTransportRequest

@@ -1,2 +1,2 @@
-import { DateAndTimeCommonComponent } from './DateAndTimeCommonComponent';
-export default DateAndTimeCommonComponent;
+import { DateAndTimeCommonComponent } from './DateAndTimeCommonComponent'
+export default DateAndTimeCommonComponent

@@ -1,12 +1,12 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
-const ButtonTag = styled.button `
+const ButtonTag = styled.button`
    width: 300px;
    height: 40px;
    border-radius: 4px;
    background-color: #0b69ff;
    margin: 5px;
-   color:white;
-`;
+   color: white;
+`
 
-export { ButtonTag };
+export { ButtonTag }

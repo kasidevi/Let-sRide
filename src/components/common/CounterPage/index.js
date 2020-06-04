@@ -1,2 +1,2 @@
-import CounterPage from './CounterPage';
-export default CounterPage;
+import CounterPage from './CounterPage'
+export default CounterPage

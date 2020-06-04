@@ -1,2 +1,2 @@
 import { ShareRide } from './ShareRide'
-export default ShareRide;
+export default ShareRide

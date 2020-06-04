@@ -1,52 +1,51 @@
-import { observable, action } from 'mobx';
+import { observable, action } from 'mobx'
 import {
-    API_INITIAL,
-    API_FAILED,
-    API_SUCCESS,
-    API_FETCHING
-}
-from '@ib/api-constants';
-import { bindPromiseWithOnSuccess } from '@ib/mobx-promise';
-import { setAccessToken } from '../../../utils/StorageUtils';
+   API_INITIAL,
+   API_FAILED,
+   API_SUCCESS,
+   API_FETCHING
+} from '@ib/api-constants'
+import { bindPromiseWithOnSuccess } from '@ib/mobx-promise'
+import { setAccessToken } from '../../../utils/StorageUtils'
 
 class ShareRideStore {
-    @observable ShareRideAPIStatus
-    @observable ShareRideAPIError
-    @observable shareRideAPIService
-    shareRideService
-    constructor(shareRideService) {
-        this.shareRideService = shareRideService;
-        this.init();
-    }
+   @observable ShareRideAPIStatus
+   @observable ShareRideAPIError
+   @observable shareRideAPIService
+   shareRideService
+   constructor(shareRideService) {
+      this.shareRideService = shareRideService
+      this.init()
+   }
 
-    @action.bound
-    userRequest() {
-        const requestPromise = this.shareRideService.requestAPI();
-        return bindPromiseWithOnSuccess(requestPromise)
-            .to(this.setShareRideAPIStatus, this.setShareRideAPIResponse)
-            .catch(this.setShareRideAPIError);
-    }
+   @action.bound
+   userRequest() {
+      const requestPromise = this.shareRideService.requestAPI()
+      return bindPromiseWithOnSuccess(requestPromise)
+         .to(this.setShareRideAPIStatus, this.setShareRideAPIResponse)
+         .catch(this.setShareRideAPIError)
+   }
 
-    @action.bound
-    setShareRideAPIResponse(response) {
-        setAccessToken(response.access_token);
-    }
+   @action.bound
+   setShareRideAPIResponse(response) {
+      setAccessToken(response.access_token)
+   }
 
-    @action.bound
-    setShareRideAPIError(error) {
-        this.getShareRideAPIError = error;
-    }
+   @action.bound
+   setShareRideAPIError(error) {
+      this.getShareRideAPIError = error
+   }
 
-    @action.bound
-    setShareRideAPIStatus(apiStatus) {
-        this.getShareRideAPIStatus = apiStatus;
-    }
+   @action.bound
+   setShareRideAPIStatus(apiStatus) {
+      this.getShareRideAPIStatus = apiStatus
+   }
 
-    @action
-    init() {
-        this.getShareRideAPIStatus = API_INITIAL;
-        this.getShareRideAPIError = null;
-    }
+   @action
+   init() {
+      this.getShareRideAPIStatus = API_INITIAL
+      this.getShareRideAPIError = null
+   }
 }
 
-export { ShareRideStore };
+export { ShareRideStore }

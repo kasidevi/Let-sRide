@@ -7,11 +7,7 @@ import { Div } from './stylings'
 //@observer
 class Authentication extends React.Component {
    render() {
-      return (
-         <Div>
-      hiii
-         </Div>
-      )
+      return <Div>hiii</Div>
    }
 }
 

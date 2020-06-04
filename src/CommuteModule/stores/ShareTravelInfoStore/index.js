@@ -1,2 +1,2 @@
-import { ShareTravelInfoStore } from './ShareTravelInfoStore';
-export default ShareTravelInfoStore;
+import { ShareTravelInfoStore } from './ShareTravelInfoStore'
+export default ShareTravelInfoStore

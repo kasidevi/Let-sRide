@@ -1,2 +1,2 @@
-import {RideRequestStore} from './RideRequestStore';
-export default RideRequestStore;
+import { RideRequestStore } from './RideRequestStore'
+export default RideRequestStore

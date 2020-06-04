@@ -1,2 +1,2 @@
-import { UserMiniProfile } from './UserMiniProfile';
-export default UserMiniProfile;
+import { UserMiniProfile } from './UserMiniProfile'
+export default UserMiniProfile

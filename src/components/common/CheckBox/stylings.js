@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
-const Input = styled.input `
-    width:20px;
-`;
+const Input = styled.input`
+   width: 20px;
+`
 
-export { Input };
+export { Input }

@@ -1,2 +1,2 @@
-import { ShareRideStore } from './ShareRideStore';
-export default ShareRideStore;
+import { ShareRideStore } from './ShareRideStore'
+export default ShareRideStore

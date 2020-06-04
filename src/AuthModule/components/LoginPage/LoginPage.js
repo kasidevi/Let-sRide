@@ -1,11 +1,11 @@
-import React from 'react';
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
+import React from 'react'
+import { observable } from 'mobx'
+import { observer } from 'mobx-react'
 
-import InputField from '../../../components/common/InputField/index';
-import Button from '../../../components/common/Buttons/index';
+import InputField from '../../../components/common/InputField/index'
+import Button from '../../../components/common/Buttons/index'
 
-import StringsData from '../../i18n/string.json';
+import StringsData from '../../i18n/string.json'
 
 import {
    Header,
@@ -18,14 +18,11 @@ import {
    ErrorMessage,
    DontHaveAccount,
    AnchorTag
-}
-from './stylings';
+} from './stylings'
 
 @observer
 class LoginPage extends React.Component {
-
    render() {
-
       const {
          onChangeUsername,
          onChangePassword,
@@ -36,7 +33,7 @@ class LoginPage extends React.Component {
          isPassWordEmpty,
          username,
          password
-      } = this.props;
+      } = this.props
 
       return (
          <MainDiv>
@@ -45,45 +42,51 @@ class LoginPage extends React.Component {
                   src='https://cdn.zeplin.io/5d0afc9102b7fa56760995cc/assets/d1119fe1-4f3a-40fd-860b-3adee7ca7915.svg'
                   alt='ibhubs Logo'
                />
-               <Header>
-                  {StringsData.hiThereLogin}
-               </Header>
-               
+               <Header>{StringsData.hiThereLogin}</Header>
+
                <DivFlexColumn>
-                     <UserName>
-                        {StringsData.userName}
-                     </UserName>
-                     <InputField
-                        onChangeInputText={onChangeUsername}
-                        type='text'
-                        defaultValue={username}
-                        isFeildEmpty={isUserNameEmpty}
-                     />
-                     {isUserNameEmpty?<ErrorMessage>{errorMessageForUsername}</ErrorMessage>:''}
+                  <UserName>{StringsData.userName}</UserName>
+                  <InputField
+                     onChangeInputText={onChangeUsername}
+                     type='text'
+                     defaultValue={username}
+                     isFeildEmpty={isUserNameEmpty}
+                  />
+                  {isUserNameEmpty ? (
+                     <ErrorMessage>{errorMessageForUsername}</ErrorMessage>
+                  ) : (
+                     ''
+                  )}
                </DivFlexColumn>
-               
+
                <DivFlexColumn>
-                     <Password>
-                        {StringsData.password}
-                     </Password>
-                     <InputField
-                        onChangeInputText={onChangePassword}
-                        type='password'
-                        defaultValue={password}
-                        isFeildEmpty={isPassWordEmpty}
-                     />
-                     {isPassWordEmpty?<ErrorMessage>{errorMessageForPassword}</ErrorMessage>:''}
+                  <Password>{StringsData.password}</Password>
+                  <InputField
+                     onChangeInputText={onChangePassword}
+                     type='password'
+                     defaultValue={password}
+                     isFeildEmpty={isPassWordEmpty}
+                  />
+                  {isPassWordEmpty ? (
+                     <ErrorMessage>{errorMessageForPassword}</ErrorMessage>
+                  ) : (
+                     ''
+                  )}
                </DivFlexColumn>
-               
-               <Button onSubmitButton={onClickLogin} buttonName={StringsData.login} />
-               
-               <DontHaveAccount>{StringsData.dontHaveAnAccount} <AnchorTag>{StringsData.signUp}</AnchorTag></DontHaveAccount>
-               
-               
+
+               <Button
+                  onSubmitButton={onClickLogin}
+                  buttonName={StringsData.login}
+               />
+
+               <DontHaveAccount>
+                  {StringsData.dontHaveAnAccount}{' '}
+                  <AnchorTag>{StringsData.signUp}</AnchorTag>
+               </DontHaveAccount>
             </Div>
          </MainDiv>
-      );
+      )
    }
 }
 
-export default LoginPage;
+export default LoginPage

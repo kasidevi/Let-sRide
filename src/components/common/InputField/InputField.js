@@ -1,11 +1,15 @@
-import React from 'react';
-import { Div, InputTag } from './stylings';
+import React from 'react'
+import { Div, InputTag } from './stylings'
 
 class InputField extends React.Component {
-
-
    render() {
-      const { type, defaultValue, onChangeInputText, placeholder, isFeildEmpty } = this.props;
+      const {
+         type,
+         defaultValue,
+         onChangeInputText,
+         placeholder,
+         isFeildEmpty
+      } = this.props
 
       return (
          <Div>
@@ -17,8 +21,8 @@ class InputField extends React.Component {
                isFeildEmpty={isFeildEmpty}
             />
          </Div>
-      );
+      )
    }
 }
 
-export default InputField;
+export default InputField

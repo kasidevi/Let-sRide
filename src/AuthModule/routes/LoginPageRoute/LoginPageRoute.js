@@ -1,8 +1,8 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import { observable } from 'mobx'
-import LoginPage from '../../components/LoginPage/index';
-import { withRouter } from 'react-router';
+import LoginPage from '../../components/LoginPage/index'
+import { withRouter } from 'react-router'
 
 @inject('authStore')
 @observer
@@ -14,55 +14,47 @@ class LoginPageRoute extends React.Component {
    @observable isUserNameEmpty
    @observable isPassWordEmpty
    constructor(props) {
-      super(props);
-      this.username = '';
-      this.password = '';
-      this.errorMessageForUsername = '';
-      this.errorMessageForPassword = '';
-      this.isUserNameEmpty = false;
-      this.isPassWordEmpty = false;
+      super(props)
+      this.username = ''
+      this.password = ''
+      this.errorMessageForUsername = ''
+      this.errorMessageForPassword = ''
+      this.isUserNameEmpty = false
+      this.isPassWordEmpty = false
    }
 
    onChangeUsername = event => {
       if (event.target.value.trim !== '') {
-         this.username = event.target.value;
-         this.isUserNameEmpty = false;
-      }
-      else {
-         this.isUserNameEmpty = true;
+         this.username = event.target.value
+         this.isUserNameEmpty = false
+      } else {
+         this.isUserNameEmpty = true
       }
    }
-
 
    onChangePassword = event => {
       if (event.target.value.trim !== '') {
-         this.password = event.target.value;
-         this.isPassWordEmpty = false;
-      }
-      else {
-         this.isPassWordEmpty = true;
+         this.password = event.target.value
+         this.isPassWordEmpty = false
+      } else {
+         this.isPassWordEmpty = true
       }
    }
 
-
    onClickLogin = event => {
-
       if (this.username === '') {
-         this.errorMessageForUsername = 'Please enter username';
-         this.isUserNameEmpty = true;
+         this.errorMessageForUsername = 'Please enter username'
+         this.isUserNameEmpty = true
       }
 
       if (this.password === '') {
-         this.errorMessageForPassword = 'Please enter password';
-         this.isPassWordEmpty = true;
+         this.errorMessageForPassword = 'Please enter password'
+         this.isPassWordEmpty = true
+      } else if (this.username !== '' && this.password !== '') {
+         this.props.authStore.userLogIn()
+         const { history } = this.props
+         history.push('/home-screen')
       }
-
-      else if (this.username !== '' && this.password !== '') {
-         this.props.authStore.userLogIn();
-         const { history } = this.props;
-         history.push('/home-screen');
-      }
-
    }
 
    render() {
@@ -78,8 +70,8 @@ class LoginPageRoute extends React.Component {
             isUserNameEmpty={this.isUserNameEmpty}
             isPassWordEmpty={this.isPassWordEmpty}
          />
-      );
+      )
    }
 }
 
-export default withRouter(LoginPageRoute);
+export default withRouter(LoginPageRoute)

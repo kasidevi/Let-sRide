@@ -1,2 +1,2 @@
-import { UserRequests } from './UserRequests';
-export default UserRequests;
+import { UserRequests } from './UserRequests'
+export default UserRequests
