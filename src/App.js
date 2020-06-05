@@ -12,13 +12,14 @@ import ShareTravelInfo from './CommuteModule/components/ShareTravelInfo/index.js
 import UserMiniProfile from './CommuteModule/components/UserMiniProfile/index.js'
 import UserRequests from './CommuteModule/components/UserRequests/index.js'
 import stores from './AuthModule/stores'
+import commuteStores from './CommuteModule/stores'
 
 import './App.css'
 
 class App extends React.Component {
    render() {
       return (
-         <Provider {...stores}>
+         <Provider {...stores} {...commuteStores}>
             <Router basename={process.env.PUBLIC_URL}>
                <Switch>
                   <Route exact path='/LoginPage'>

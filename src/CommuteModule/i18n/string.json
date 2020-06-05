@@ -22,11 +22,13 @@
     "others": "OTHERS",
     "assetSensitivity": "ASSET SENSITIVITY",
     "whomToDeliver": "WHOM TO DELIVER",
+    "noOfAssets": "NO.OF ASSETS",
 
     "shareTravelInfo": "SHARE TRAVEL INFO",
     "travelMedium": "TRAVEL MEDIUM",
     "assetsQuantity": "ASSETS QUANTITY",
     "shareForButton": "SHARE",
+    "other": "OTHER",
 
     "noOfPeople": "NO.OF PEOPLE",
     "acceptedPersonDetails": "ACCEPTED PERSON DETAILS",

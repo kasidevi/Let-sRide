@@ -1,5 +1,5 @@
 import { create } from 'apisauce'
-import { networkCallWithApisauce } from '../../../utils.APIUtils'
+import { networkCallWithApisauce } from '../../../utils/APIUtils'
 import { apiMethods } from '../../../constants/APIConstants'
 
 class AssetTransportRequestService {
@@ -10,11 +10,10 @@ class AssetTransportRequestService {
       })
    }
 
-   RideRequestAPI() {
+   assetTransportRequestAPI() {
       return networkCallWithApisauce(
          this.api,
-         '/AssetTransportRequest',
-         {},
+         '/AssetTransportRequest', {},
          apiMethods.post
       )
    }

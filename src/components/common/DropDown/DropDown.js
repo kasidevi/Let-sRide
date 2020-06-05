@@ -9,7 +9,7 @@ class DropDown extends React.Component {
 
     onChange = list => {
         return this.props.data.map(list => (
-            <List key={Math.random()} onClick={this.onChangeList} value={list}>
+            <List id={Math.random()} key={Math.random()} onClick={this.onChangeList} value={list}>
             {list}
          </List>
         ));

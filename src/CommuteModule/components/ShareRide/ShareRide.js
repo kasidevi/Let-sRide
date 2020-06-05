@@ -1,6 +1,6 @@
 import React from 'react'
 import { observable } from 'mobx'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 
 import InputField from '../../../components/common/InputField/index'
 import Button from '../../../components/common/Buttons/index'
@@ -26,8 +26,10 @@ import {
    Requried,
    RequriedText,
    DivWithFlexCol
-} from './stylings'
+}
+from './stylings'
 
+@inject('shareRideStore')
 @observer
 class ShareRide extends React.Component {
    @observable isFlexibleTimings
@@ -40,12 +42,16 @@ class ShareRide extends React.Component {
    @observable assetQuantity
    @observable isSeatsCountZero
    @observable isAssetsQuantityZero
-   initialTime
+   @observable fromDateAndTime
+   @observable toDateAndTime
+   @observable isFromTimeChanged
+
    constructor(props) {
       super(props)
       this.isFlexibleTimings = false
-      this.date = new Date()
-      this.initialTime = this.date
+      this.date = null
+      this.fromDateAndTime = null
+      this.toDateAndTime = null
       this.from = ''
       this.toData = ''
       this.isFromFieldEmpty = false
@@ -55,17 +61,28 @@ class ShareRide extends React.Component {
       this.isAssetsQuantityZero = true
       this.seatsCount = 0
       this.assetQuantity = 0
+      this.isFromTimeChanged = false;
    }
 
    onChecked = () => {
       this.isFlexibleTimings = !this.isFlexibleTimings
+      if (this.isFlexibleTimings) {
+         this.isTimeChanged = false;
+      }
+      else {
+         this.isFromTimeChanged = false;
+      }
+      this.fromDateAndTime = null;
+      this.toDateAndTime = null;
+      this.date = null;
    }
 
    onChangeFrom = event => {
       this.from = event.target.value.trim()
       if (this.from === '') {
          this.isFromFieldEmpty = true
-      } else {
+      }
+      else {
          this.isFromFieldEmpty = false
       }
    }
@@ -74,7 +91,8 @@ class ShareRide extends React.Component {
       this.toData = event.target.value.trim()
       if (this.toData === '') {
          this.isToFieldEmpty = true
-      } else {
+      }
+      else {
          this.isToFieldEmpty = false
       }
    }
@@ -82,13 +100,26 @@ class ShareRide extends React.Component {
    onChangeDateAndTime = event => {
       this.date = event.target.value
       this.isTimeChanged = false
+      this.fromDateAndTime = null;
+      this.toDateAndTime = null;
+
+   }
+   onChangeFromDateAndTime = (fromDateAndTime) => {
+      this.fromDateAndTime = fromDateAndTime;
+      this.isFromTimeChanged = false;
+      this.date = null;
+   }
+
+   onChangeToDateAndTime = (toDateAndTime) => {
+      this.toDateAndTime = toDateAndTime;
    }
 
    noOfSeatsCount = count => {
       this.seatsCount = count
       if (this.seatsCount === 0) {
          this.isSeatsCountZero = false
-      } else {
+      }
+      else {
          this.isSeatsCountZero = true
       }
    }
@@ -97,7 +128,8 @@ class ShareRide extends React.Component {
       this.assetQuantity = count
       if (this.seatsCount === 0) {
          this.isAssetsQuantityZero = false
-      } else {
+      }
+      else {
          this.isAssetsQuantityZero = true
       }
    }
@@ -109,32 +141,39 @@ class ShareRide extends React.Component {
       if (this.toData === '') {
          this.isToFieldEmpty = true
       }
-      if (this.initialTime === this.date) {
+      if (this.date === null) {
          this.isTimeChanged = true
       }
-      if (this.seatsCount === 0) {
+      if (this.fromDateAndTime === null) {
+         this.isFromTimeChanged = true
+      }
+      if (this.seatsCount <= 0) {
          this.isSeatsCountZero = false
       }
-      if (this.assetQuantity === 0) {
+      if (this.assetQuantity <= 0) {
          this.isAssetsQuantityZero = false
-      } else if (
+      }
+      else if (
          this.from !== '' &&
          this.toData !== '' &&
-         this.initialTime !== this.date &&
+         (this.date !== null || this.fromDateAndTime !== null) &&
          this.seatsCount > 0 &&
          this.assetQuantity > 0
       ) {
-         alert('rideRequest')
-         console.log(
-            'from',
-            this.from,
-            'to',
-            this.toData,
-            'seatsCount',
-            this.seatsCount,
-            'assetQuantity',
-            this.assetQuantity
-         )
+         alert('shareRequest')
+         this.shareRide(this.from, this.toData, this.date, this.fromDateAndTime, this.toDateAndTime, this.isFlexibleTimings, this.seatsCount, this.assetQuantity);
+      }
+   }
+
+   async shareRide(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, seatsCount, assetsQuantity) {
+      const { shareRideStore: { userRequest } } = this.props;
+      await userRequest(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, seatsCount, assetsQuantity);
+      const { shareRideStore: { access_token } } = this.props;
+      console.log(access_token);
+      if (access_token) {
+         console.log('shareRide integration');
+         const { history } = this.props;
+         history.push('/home-screen');
       }
    }
 
@@ -182,29 +221,27 @@ class ShareRide extends React.Component {
                   </DivWithFlexCol>
 
                   <DivWithFlexCol>
-                     {this.isFlexibleTimings ? (
-                        ''
-                     ) : (
+                     {this.isFlexibleTimings ? ('') : (
                         <DateAndTime>
                            {StringsData.dateAndTime}
                            <Requried>*</Requried>
                         </DateAndTime>
                      )}
                      {this.isFlexibleTimings ? (
-                        <DateAndTimeCommonComponent />
-                     ) : (
+                        <DateAndTimeCommonComponent 
+                        onChangeFromDateAndTime={this.onChangeFromDateAndTime}
+                        onChangeToDateAndTime={this.onChangeToDateAndTime}
+                        />) : (
                         <InputField
                            onChangeInputText={this.onChangeDateAndTime}
-                           type='date'
+                           type='datetime-local'
                            placeholder='Date and Time'
                         />
                      )}
                   </DivWithFlexCol>
-                  {this.isTimeChanged ? (
-                     <RequriedText>Required</RequriedText>
-                  ) : (
-                     ''
-                  )}
+                  {this.isFlexibleTimings?this.isFromTimeChanged?<RequriedText>Required</RequriedText>:'':
+                  this.isTimeChanged?<RequriedText>Required</RequriedText>:''}
+                                
 
                   <DivForFlexibleTimings>
                      <CheckBox onChecked={this.onChecked} />

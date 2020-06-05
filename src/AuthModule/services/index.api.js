@@ -6,7 +6,7 @@ class AuthService {
    api
    constructor() {
       this.api = create({
-         baseURL: 'https://4015ee346b19.ngrok.io'
+         baseURL: 'https://f5d8ce6deab9.ngrok.io'
       });
    }
 
@@ -14,7 +14,7 @@ class AuthService {
       const details = {
          mobile_number: mobileNumber,
          password: password
-      }
+      };
 
       return networkCallWithApisauce(
          this.api,

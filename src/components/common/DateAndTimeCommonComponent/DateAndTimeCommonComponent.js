@@ -1,7 +1,6 @@
 import React from 'react'
 import { observable } from 'mobx'
 import { observer } from 'mobx-react'
-//import DatePicker from 'react-date-picker';
 
 import { Div, From, To, Input, Requried } from './stylings'
 
@@ -35,7 +34,7 @@ class DateAndTimeCommonComponent extends React.Component {
                </From>
                <Input
                   onChange={this.onChangeFromDateAndTime}
-                  type='date'
+                  type='datetime-local'
                   placeholder='Select'
                />
             </div>
@@ -43,7 +42,7 @@ class DateAndTimeCommonComponent extends React.Component {
                <To>TO</To>
                <Input
                   onChange={this.onChangeToDateAndTime}
-                  type='date'
+                  type='datetime-local'
                   placeholder='Select'
                />
             </div>
@@ -53,21 +52,3 @@ class DateAndTimeCommonComponent extends React.Component {
 }
 
 export { DateAndTimeCommonComponent }
-
-/*
-@observable date
-    constructor(props) {
-        super(props);
-        this.date = new Date();
-    }
-
-    onChange = (event) => {
-        this.date = event.target.value;
-    }
-
-
-<DatePicker
-        onChange={this.onChange}
-        value={this.date}
-                        />
-*/

@@ -38,11 +38,13 @@ class AuthStore {
    @action.bound
    setUserLogInAPIError(error) {
       this.getUserLogInAPIError = error
+      console.log(error)
    }
 
    @action.bound
    setUserLogInAPIStatus(apiStatus) {
       this.getUserLogInAPIStatus = apiStatus
+      console.log(apiStatus)
    }
 
    @action.bound

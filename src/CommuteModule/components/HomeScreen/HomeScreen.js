@@ -30,8 +30,7 @@ class HomeScreen extends React.Component {
         super(props);
         this.request = 'Ride';
         this.share = 'Ride';
-        this.requestComponent = 'RideRequest';
-        this.shareComponent = 'ShareRide';
+        this.component = 'RideRequest';
         this.isRequest = false;
         this.isShare = false;
         this.requestOptions = ['Ride', 'Asset Transport'];
@@ -51,23 +50,43 @@ class HomeScreen extends React.Component {
     onChangeRequest = event => {
         this.request = event;
         if (this.request === 'Ride') {
-            this.requestComponent = 'RideRequest';
+            this.component = 'RideRequest';
         }
-        else if (this.request === 'AssetTransport') {
-            this.requestComponent = 'AssetTransportRequest';
+        else if (this.request === 'Asset Transport') {
+            this.component = 'AssetTransportRequest';
         }
-        console.log('onChangeRequest', this.request, this.requestComponent);
+        console.log('onChangeRequest', this.request, this.component);
     }
 
     onChangeShare = event => {
         this.share = event;
         if (this.share === 'Ride') {
-            this.shareComponent = 'ShareRide';
+            this.component = 'ShareRide';
         }
-        else if (this.share === 'TravelInfo') {
-            this.shareComponent = 'ShareTravelInfo';
+        else if (this.share === 'Travel Info') {
+            this.component = 'ShareTravelInfo';
         }
-        console.log('onChangeShare', this.share, this.shareComponent);
+    }
+
+
+    componentRender = () => {
+        switch (this.component) {
+            case this.component === 'RideRequest':
+                console.log('riderequest');
+                return <RideRequest/>
+            case this.component === 'AssetTransportRequest':
+                console.log('assetTransportRequest');
+                <AssetTransportRequest/>
+            case this.component === 'ShareRide':
+                console.log('shareride');
+                return <ShareRide/>
+            case this.component === 'ShareTravelInfo':
+                console.log('shareTravel');
+                return <ShareTravelInfo/>
+            default:
+                console.log('default');
+                return <RideRequest/>
+        }
     }
 
     render() {
@@ -117,7 +136,9 @@ class HomeScreen extends React.Component {
                </HeaderLeftPart>
                
             </Header>
-            <RideRequest />
+            
+            {this.componentRender()}
+            
          </div>
         );
     }

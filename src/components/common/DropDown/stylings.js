@@ -15,7 +15,8 @@ const Div = styled.div `
    flex-wrap: wrap;
    align-items: center;
 `;
-const List = styled.li `
+
+const List = styled.button `
    cursor: default;
    color:grey;
    &:hover {
@@ -25,7 +26,8 @@ const List = styled.li `
         border-radius:2px;
       }
 `;
-const OrderedList = styled.ul `
+
+const OrderedList = styled.div `
    cursor: default;
 `;
 

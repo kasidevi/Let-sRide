@@ -7,6 +7,7 @@ import Button from '../../../components/common/Buttons/index'
 import CounterPage from '../../../components/common/CounterPage/index'
 import CheckBox from '../../../components/common/CheckBox/index'
 import DateAndTimeCommonComponent from '../../../components/common/DateAndTimeCommonComponent'
+import SelectOptions from '../../../components/common/SelectOptions/index.js'
 
 import StringsData from '../../i18n/string.json'
 
@@ -24,51 +25,82 @@ import {
    From,
    To,
    DateAndTime,
-   NoOfSeats,
+   NoOfAssets,
    AssetType,
    AssetSensitivity,
-   WhomToDeliver
-} from './stylings'
+   WhomToDeliver,
+   Other
+}
+from './stylings'
 
 @observer
 class AssetTransportRequest extends React.Component {
    @observable isFlexibleTimings
    @observable date
    @observable from
+   @observable toData
    @observable isFromFieldEmpty
    @observable isToFieldEmpty
    @observable counterValue
-   @observable seatsCount
-   @observable isSeatsCountZero
+   @observable assetsCount
+   @observable isAssetsCountZero
    @observable isDelivered
    @observable deliverdData
-   initialTime
+   @observable fromDateAndTime
+   @observable toDateAndTime
+   @observable isTimeChanged
+   @observable isFromTimeChanged
+   @observable assetSensitivityList
+   @observable assetSenstiveType
+   @observable assetTypeList
+   @observable assetType
+   @observable isAssetTypeEmpty
+   @observable isAssetTypeOther
+   @observable isOtherFieldEmpty
+   @observable otherAsset
 
    constructor(props) {
       super(props)
       this.isFlexibleTimings = false
-      this.date = new Date()
-      this.initialTime = this.date
+      this.date = null
+      this.fromDateAndTime = null;
+      this.toDateAndTime = null;
       this.from = ''
       this.toData = ''
       this.isFromFieldEmpty = false
       this.isToFieldEmpty = false
       this.isTimeChanged = false
-      this.isSeatsCountZero = true
-      this.seatsCount = 0
+      this.isAssetsCountZero = true
+      this.assetsCount = 0
       this.isDelivered = false
       this.deliverdData = ''
+      this.isFromTimeChanged = false
+      this.assetSensitivityList = ['', 'medium', 'low', 'high']
+      this.assetSenstiveType = '';
+      this.assetTypeList = ['', 'Parcel', 'Bags', 'other']
+      this.assetType = ''
+      this.isAssetTypeEmpty = false;
+      this.isAssetTypeOther = false;
+      this.isOtherFieldEmpty = false;
+      this.otherAsset = null
    }
 
    onChecked = () => {
       this.isFlexibleTimings = !this.isFlexibleTimings
+      if (this.isFlexibleTimings) {
+         this.isTimeChanged = false;
+      }
+      this.fromDateAndTime = null;
+      this.toDateAndTime = null;
+      this.date = null;
    }
 
    onChangeFrom = event => {
       this.from = event.target.value.trim()
       if (this.from === '') {
          this.isFromFieldEmpty = true
-      } else {
+      }
+      else {
          this.isFromFieldEmpty = false
       }
    }
@@ -77,30 +109,77 @@ class AssetTransportRequest extends React.Component {
       this.toData = event.target.value.trim()
       if (this.toData === '') {
          this.isToFieldEmpty = true
-      } else {
+      }
+      else {
          this.isToFieldEmpty = false
+      }
+   }
+
+   onChangeOther = event => {
+      this.other = event.target.value.trim()
+      //   this.assetType = '';
+      if (this.other === '' || this.other === null) {
+         this.isOtherFieldEmpty = true
+      }
+      else {
+         this.isOtherFieldEmpty = false
       }
    }
 
    onChangeDateAndTime = event => {
       this.date = event.target.value
       this.isTimeChanged = false
+      this.fromDateAndTime = null;
+      this.toDateAndTime = null;
+   }
+   onChangeFromDateAndTime = (fromDateAndTime) => {
+      this.fromDateAndTime = fromDateAndTime;
+      this.isFromTimeChanged = false;
+      this.date = null;
    }
 
-   noOfSeatsCount = count => {
-      this.seatsCount = count
-      if (this.seatsCount === 0) {
-         this.isSeatsCountZero = false
-      } else {
-         this.isSeatsCountZero = true
+   onChangeToDateAndTime = (toDateAndTime) => {
+      this.toDateAndTime = toDateAndTime;
+   }
+
+   noOfassetsCount = count => {
+      this.assetsCount = count
+      if (this.assetsCount === 0) {
+         this.isAssetsCountZero = false
       }
+      else {
+         this.isAssetsCountZero = true
+      }
+   }
+
+   onChangeAssetType = (event) => {
+      this.assetType = event
+      this.other = null;
+      if (this.assetType === 'other') {
+         this.isAssetTypeOther = true
+         this.isAssetTypeEmpty = false
+      }
+      else if (this.assetType === '') {
+         this.isAssetTypeEmpty = true
+         this.isAssetTypeOther = false
+      }
+      else {
+         this.isAssetTypeEmpty = false
+         this.isAssetTypeOther = false
+         this.isOtherFieldEmpty = false
+      }
+   }
+
+   onChangeAssetSensitivity = (event) => {
+      this.assetSenstiveType = event;
    }
 
    whomToDeliver = event => {
       this.deliverdData = event.target.value
       if (this.deliverdData === '') {
          this.isDelivered = true
-      } else {
+      }
+      else {
          this.isDelivered = false
       }
    }
@@ -112,22 +191,34 @@ class AssetTransportRequest extends React.Component {
       if (this.toData === '') {
          this.isToFieldEmpty = true
       }
-      if (this.initialTime === this.date) {
-         this.isTimeChanged = true
+      if (this.date === null) {
+         this.isTimeChanged = true;
       }
-      if (this.seatsCount === 0) {
-         this.isSeatsCountZero = false
+      if (this.fromDateAndTime === null) {
+         this.isFromTimeChanged = true;
+      }
+      if (this.assetsCount <= 0) {
+         this.isAssetsCountZero = false
+      }
+      if (this.assetType === '') {
+         this.isAssetTypeEmpty = true
+      }
+      if (this.other === '' || this.other === null) {
+         this.isOtherFieldEmpty = true
       }
       if (this.deliverdData === '') {
          this.isDelivered = true
-      } else if (
+      }
+      else if (
          this.from !== '' &&
          this.toData !== '' &&
-         this.initialTime !== this.date &&
-         this.seatsCount !== 0 &&
+         (this.date !== null || this.fromDateAndTime !== null) &&
+         (this.other !== '' || this.other !== null) &&
+         this.assetsCount !== 0 && this.assetType !== '' &&
          this.deliverdData !== ''
       ) {
          alert('AssetTransportRequestForm')
+         console.log(this.from, this.toData, this.date, this.fromDateAndTime, this.isFlexibleTimings, this.assetsCount, this.assetType, this.other, this.assetSenstiveType, this.deliverdData)
       }
    }
 
@@ -174,30 +265,22 @@ class AssetTransportRequest extends React.Component {
                      )}
                   </DivWithFlexCol>
 
-                  <DivWithFlexCol>
-                     {this.isFlexibleTimings ? (
-                        ''
-                     ) : (
-                        <DateAndTime>
-                           {StringsData.dateAndTime}
-                           <Requried>*</Requried>
-                        </DateAndTime>
-                     )}
-                     {this.isFlexibleTimings ? (
-                        <DateAndTimeCommonComponent />
-                     ) : (
-                        <InputField
+                    <DivWithFlexCol>
+                           {this.isFlexibleTimings?'':<DateAndTime>{StringsData.dateAndTime}<Requried>*</Requried></DateAndTime>}
+                           {this.isFlexibleTimings?
+                           <DateAndTimeCommonComponent 
+                           onChangeFromDateAndTime={this.onChangeFromDateAndTime}
+                           onChangeToDateAndTime={this.onChangeToDateAndTime}
+                           />:
+                           <InputField 
                            onChangeInputText={this.onChangeDateAndTime}
-                           type='date'
-                           placeholder='Date and Time'
-                        />
-                     )}
-                  </DivWithFlexCol>
-                  {this.isTimeChanged ? (
-                     <RequriedText>Required</RequriedText>
-                  ) : (
-                     ''
-                  )}
+                           type="datetime-local" 
+                           placeholder="Date and Time"
+                           />}
+                    </DivWithFlexCol>
+                          {this.isFlexibleTimings?this.isFromTimeChanged?<RequriedText>Required</RequriedText>:'':
+                           this.isTimeChanged?<RequriedText>Required</RequriedText>:''}
+                                
 
                   <DivForFlexibleTimings>
                      <CheckBox onChecked={this.onChecked} />
@@ -207,13 +290,13 @@ class AssetTransportRequest extends React.Component {
                   </DivForFlexibleTimings>
 
                   <Div>
-                     <NoOfSeats>
-                        {StringsData.noOfSeats}
+                     <NoOfAssets>
+                        {StringsData.noOfAssets}
                         <Requried>*</Requried>
-                     </NoOfSeats>
-                     <CounterPage counterValue={this.noOfSeatsCount} />
+                     </NoOfAssets>
+                     <CounterPage counterValue={this.noOfassetsCount} />
                   </Div>
-                  {this.isSeatsCountZero ? (
+                  {this.isAssetsCountZero ? (
                      ''
                   ) : (
                      <RequriedText>Required</RequriedText>
@@ -224,15 +307,35 @@ class AssetTransportRequest extends React.Component {
                         {StringsData.assetType}
                         <Requried>*</Requried>
                      </AssetType>
-                     <InputField type='text' placeholder='Asset type' />
+                    <SelectOptions
+                    data={this.assetTypeList}
+                    onChangeValue={this.onChangeAssetType}
+                    isVaild={this.isAssetTypeEmpty}
+                    />
                   </DivWithFlexCol>
-
+                  {this.isAssetTypeEmpty?<RequriedText>Required</RequriedText>:''}
+                  
+               <DivWithFlexCol>
+                  {this.isAssetTypeOther?<Other>{StringsData.other}</Other>:''}
+                  {this.isAssetTypeOther?<InputField
+                        onChangeInputText={this.onChangeOther}
+                        type='text'
+                        placeholder='other.'
+                        isFeildEmpty={this.isOtherFieldEmpty}
+                     />:''}
+               </DivWithFlexCol>
+                  {this.isOtherFieldEmpty&&this.isAssetTypeOther? <RequriedText>Required</RequriedText>:''}
+                  
+                  
                   <DivWithFlexCol>
                      <AssetSensitivity>
                         {StringsData.assetSensitivity}
                         <Requried>*</Requried>
                      </AssetSensitivity>
-                     <InputField type='text' placeholder='Select Sentivity' />
+                      <SelectOptions 
+                     data={this.assetSensitivityList}
+                     onChangeValue={this.onChangeAssetSensitivity}
+                     />
                   </DivWithFlexCol>
 
                   <DivWithFlexCol>

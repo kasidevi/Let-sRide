@@ -1,5 +1,5 @@
-import RideRequestService from '../services/RideRequestService/index.api'
-import ShareRideService from '../services/ShareRideService/index.api'
+import RideRequestService from '../services/RideRequestServices/index.api'
+import ShareRideService from '../services/ShareRideServices/index.api'
 import AssetTransportRequestService from '../services/AssetTransportRequestService/index.api'
 import ShareTravelInfoService from '../services/ShareTravelInfoService/index.api'
 
