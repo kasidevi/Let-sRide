@@ -1,6 +1,6 @@
 import React from 'react'
 import { observable } from 'mobx'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 
 import InputField from '../../../components/common/InputField/index'
 import Button from '../../../components/common/Buttons/index'
@@ -33,6 +33,7 @@ import {
 }
 from './stylings'
 
+@inject('assetTransportRequestStore')
 @observer
 class AssetTransportRequest extends React.Component {
    @observable isFlexibleTimings
@@ -63,8 +64,8 @@ class AssetTransportRequest extends React.Component {
       super(props)
       this.isFlexibleTimings = false
       this.date = null
-      this.fromDateAndTime = null;
-      this.toDateAndTime = null;
+      this.fromDateAndTime = null
+      this.toDateAndTime = null
       this.from = ''
       this.toData = ''
       this.isFromFieldEmpty = false
@@ -75,24 +76,24 @@ class AssetTransportRequest extends React.Component {
       this.isDelivered = false
       this.deliverdData = ''
       this.isFromTimeChanged = false
-      this.assetSensitivityList = ['', 'medium', 'low', 'high']
-      this.assetSenstiveType = '';
+      this.assetSensitivityList = ['', 'Highly Sensitive', 'Sensitive', 'Normal']
+      this.assetSenstiveType = ''
       this.assetTypeList = ['', 'Parcel', 'Bags', 'other']
       this.assetType = ''
-      this.isAssetTypeEmpty = false;
-      this.isAssetTypeOther = false;
-      this.isOtherFieldEmpty = false;
+      this.isAssetTypeEmpty = false
+      this.isAssetTypeOther = false
+      this.isOtherFieldEmpty = false
       this.otherAsset = null
    }
 
    onChecked = () => {
       this.isFlexibleTimings = !this.isFlexibleTimings
       if (this.isFlexibleTimings) {
-         this.isTimeChanged = false;
+         this.isTimeChanged = false
       }
-      this.fromDateAndTime = null;
-      this.toDateAndTime = null;
-      this.date = null;
+      this.fromDateAndTime = null
+      this.toDateAndTime = null
+      this.date = null
    }
 
    onChangeFrom = event => {
@@ -117,7 +118,6 @@ class AssetTransportRequest extends React.Component {
 
    onChangeOther = event => {
       this.other = event.target.value.trim()
-      //   this.assetType = '';
       if (this.other === '' || this.other === null) {
          this.isOtherFieldEmpty = true
       }
@@ -129,17 +129,18 @@ class AssetTransportRequest extends React.Component {
    onChangeDateAndTime = event => {
       this.date = event.target.value
       this.isTimeChanged = false
-      this.fromDateAndTime = null;
-      this.toDateAndTime = null;
-   }
-   onChangeFromDateAndTime = (fromDateAndTime) => {
-      this.fromDateAndTime = fromDateAndTime;
-      this.isFromTimeChanged = false;
-      this.date = null;
+      this.fromDateAndTime = null
+      this.toDateAndTime = null
    }
 
-   onChangeToDateAndTime = (toDateAndTime) => {
-      this.toDateAndTime = toDateAndTime;
+   onChangeFromDateAndTime = fromDateAndTime => {
+      this.fromDateAndTime = fromDateAndTime
+      this.isFromTimeChanged = false
+      this.date = null
+   }
+
+   onChangeToDateAndTime = toDateAndTime => {
+      this.toDateAndTime = toDateAndTime
    }
 
    noOfassetsCount = count => {
@@ -152,9 +153,9 @@ class AssetTransportRequest extends React.Component {
       }
    }
 
-   onChangeAssetType = (event) => {
+   onChangeAssetType = event => {
       this.assetType = event
-      this.other = null;
+      this.other = null
       if (this.assetType === 'other') {
          this.isAssetTypeOther = true
          this.isAssetTypeEmpty = false
@@ -170,8 +171,8 @@ class AssetTransportRequest extends React.Component {
       }
    }
 
-   onChangeAssetSensitivity = (event) => {
-      this.assetSenstiveType = event;
+   onChangeAssetSensitivity = event => {
+      this.assetSenstiveType = event
    }
 
    whomToDeliver = event => {
@@ -192,10 +193,10 @@ class AssetTransportRequest extends React.Component {
          this.isToFieldEmpty = true
       }
       if (this.date === null) {
-         this.isTimeChanged = true;
+         this.isTimeChanged = true
       }
       if (this.fromDateAndTime === null) {
-         this.isFromTimeChanged = true;
+         this.isFromTimeChanged = true
       }
       if (this.assetsCount <= 0) {
          this.isAssetsCountZero = false
@@ -214,12 +215,20 @@ class AssetTransportRequest extends React.Component {
          this.toData !== '' &&
          (this.date !== null || this.fromDateAndTime !== null) &&
          (this.other !== '' || this.other !== null) &&
-         this.assetsCount !== 0 && this.assetType !== '' &&
-         this.deliverdData !== ''
+         this.assetsCount !== 0 &&
+         this.assetType !== '' &&
+         this.deliverdData !== '' && this.assetSenstiveType !== ''
       ) {
-         alert('AssetTransportRequestForm')
-         console.log(this.from, this.toData, this.date, this.fromDateAndTime, this.isFlexibleTimings, this.assetsCount, this.assetType, this.other, this.assetSenstiveType, this.deliverdData)
+
+         this.assestTransportRequest(this.from, this.toData, this.date, this.fromDateAndTime,
+            this.toDateAndTime, this.isFlexibleTimings, this.assetsCount, this.assetSenstiveType, this.deliverdData)
       }
+   }
+   async assestTransportRequest(from, toData, date, fromDateAndTime,
+      toDateAndTime, isFlexibleTimings, assetsCount, assetSenstiveType, deliverdData) {
+      const { assetTransportRequestStore: { userRequest } } = this.props
+      await userRequest(from, toData, date, fromDateAndTime,
+         toDateAndTime, isFlexibleTimings, assetsCount, assetSenstiveType, deliverdData)
    }
 
    render() {
@@ -265,22 +274,41 @@ class AssetTransportRequest extends React.Component {
                      )}
                   </DivWithFlexCol>
 
-                    <DivWithFlexCol>
-                           {this.isFlexibleTimings?'':<DateAndTime>{StringsData.dateAndTime}<Requried>*</Requried></DateAndTime>}
-                           {this.isFlexibleTimings?
-                           <DateAndTimeCommonComponent 
-                           onChangeFromDateAndTime={this.onChangeFromDateAndTime}
+                  <DivWithFlexCol>
+                     {this.isFlexibleTimings ? (
+                        ''
+                     ) : (
+                        <DateAndTime>
+                           {StringsData.dateAndTime}
+                           <Requried>*</Requried>
+                        </DateAndTime>
+                     )}
+                     {this.isFlexibleTimings ? (
+                        <DateAndTimeCommonComponent
+                           onChangeFromDateAndTime={
+                              this.onChangeFromDateAndTime
+                           }
                            onChangeToDateAndTime={this.onChangeToDateAndTime}
-                           />:
-                           <InputField 
+                        />
+                     ) : (
+                        <InputField
                            onChangeInputText={this.onChangeDateAndTime}
-                           type="datetime-local" 
-                           placeholder="Date and Time"
-                           />}
-                    </DivWithFlexCol>
-                          {this.isFlexibleTimings?this.isFromTimeChanged?<RequriedText>Required</RequriedText>:'':
-                           this.isTimeChanged?<RequriedText>Required</RequriedText>:''}
-                                
+                           type='datetime-local'
+                           placeholder='Date and Time'
+                        />
+                     )}
+                  </DivWithFlexCol>
+                  {this.isFlexibleTimings ? (
+                     this.isFromTimeChanged ? (
+                        <RequriedText>Required</RequriedText>
+                     ) : (
+                        ''
+                     )
+                  ) : this.isTimeChanged ? (
+                     <RequriedText>Required</RequriedText>
+                  ) : (
+                     ''
+                  )}
 
                   <DivForFlexibleTimings>
                      <CheckBox onChecked={this.onChecked} />
@@ -307,34 +335,49 @@ class AssetTransportRequest extends React.Component {
                         {StringsData.assetType}
                         <Requried>*</Requried>
                      </AssetType>
-                    <SelectOptions
-                    data={this.assetTypeList}
-                    onChangeValue={this.onChangeAssetType}
-                    isVaild={this.isAssetTypeEmpty}
-                    />
+                     <SelectOptions
+                        data={this.assetTypeList}
+                        onChangeValue={this.onChangeAssetType}
+                        isVaild={this.isAssetTypeEmpty}
+                     />
                   </DivWithFlexCol>
-                  {this.isAssetTypeEmpty?<RequriedText>Required</RequriedText>:''}
-                  
-               <DivWithFlexCol>
-                  {this.isAssetTypeOther?<Other>{StringsData.other}</Other>:''}
-                  {this.isAssetTypeOther?<InputField
-                        onChangeInputText={this.onChangeOther}
-                        type='text'
-                        placeholder='other.'
-                        isFeildEmpty={this.isOtherFieldEmpty}
-                     />:''}
-               </DivWithFlexCol>
-                  {this.isOtherFieldEmpty&&this.isAssetTypeOther? <RequriedText>Required</RequriedText>:''}
-                  
-                  
+                  {this.isAssetTypeEmpty ? (
+                     <RequriedText>Required</RequriedText>
+                  ) : (
+                     ''
+                  )}
+
+                  <DivWithFlexCol>
+                     {this.isAssetTypeOther ? (
+                        <Other>{StringsData.other}</Other>
+                     ) : (
+                        ''
+                     )}
+                     {this.isAssetTypeOther ? (
+                        <InputField
+                           onChangeInputText={this.onChangeOther}
+                           type='text'
+                           placeholder='other.'
+                           isFeildEmpty={this.isOtherFieldEmpty}
+                        />
+                     ) : (
+                        ''
+                     )}
+                  </DivWithFlexCol>
+                  {this.isOtherFieldEmpty && this.isAssetTypeOther ? (
+                     <RequriedText>Required</RequriedText>
+                  ) : (
+                     ''
+                  )}
+
                   <DivWithFlexCol>
                      <AssetSensitivity>
                         {StringsData.assetSensitivity}
                         <Requried>*</Requried>
                      </AssetSensitivity>
-                      <SelectOptions 
-                     data={this.assetSensitivityList}
-                     onChangeValue={this.onChangeAssetSensitivity}
+                     <SelectOptions
+                        data={this.assetSensitivityList}
+                        onChangeValue={this.onChangeAssetSensitivity}
                      />
                   </DivWithFlexCol>
 

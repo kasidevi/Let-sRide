@@ -26,10 +26,10 @@ import {
    To,
    DateAndTime,
    TravelMedium,
-   AssetsQuantity,
-
+   AssetsQuantity
 }
 from './stylings'
+
 @inject('shareTravelInfoStore')
 @observer
 class ShareTravelInfo extends React.Component {
@@ -54,17 +54,17 @@ class ShareTravelInfo extends React.Component {
       super(props)
       this.isFlexibleTimings = false
       this.date = null
-      this.fromDateAndTime = null;
-      this.toDateAndTime = null;
+      this.fromDateAndTime = null
+      this.toDateAndTime = null
       this.from = ''
       this.toData = ''
       this.isFromFieldEmpty = false
       this.isToFieldEmpty = false
       this.isTimeChanged = false
-      this.isFromTimeChanged = false;
+      this.isFromTimeChanged = false
       this.isAssetsQuantityZero = true
       this.assetQuantity = 0
-      this.selectedMedium = '';
+      this.selectedMedium = ''
       this.selectMediumList = ['Select medium', 'Bus', 'Car', 'Flight']
       this.isSelcetedMedium = false
    }
@@ -72,11 +72,11 @@ class ShareTravelInfo extends React.Component {
    onChecked = () => {
       this.isFlexibleTimings = !this.isFlexibleTimings
       if (this.isFlexibleTimings) {
-         this.isTimeChanged = false;
+         this.isTimeChanged = false
       }
-      this.fromDateAndTime = null;
-      this.toDateAndTime = null;
-      this.date = null;
+      this.fromDateAndTime = null
+      this.toDateAndTime = null
+      this.date = null
    }
 
    onChangeFrom = event => {
@@ -102,18 +102,18 @@ class ShareTravelInfo extends React.Component {
    onChangeDateAndTime = event => {
       this.date = event.target.value
       this.isTimeChanged = false
-      this.fromDateAndTime = null;
-      this.toDateAndTime = null;
+      this.fromDateAndTime = null
+      this.toDateAndTime = null
    }
 
-   onChangeFromDateAndTime = (fromDateAndTime) => {
-      this.fromDateAndTime = fromDateAndTime;
-      this.isFromTimeChanged = false;
-      this.date = null;
+   onChangeFromDateAndTime = fromDateAndTime => {
+      this.fromDateAndTime = fromDateAndTime
+      this.isFromTimeChanged = false
+      this.date = null
    }
 
-   onChangeToDateAndTime = (toDateAndTime) => {
-      this.toDateAndTime = toDateAndTime;
+   onChangeToDateAndTime = toDateAndTime => {
+      this.toDateAndTime = toDateAndTime
    }
 
    assetQuantityCount = count => {
@@ -126,13 +126,13 @@ class ShareTravelInfo extends React.Component {
       }
    }
 
-   onChangeMedium = (event) => {
-      this.selectedMedium = event;
+   onChangeMedium = event => {
+      this.selectedMedium = event
       if (this.selectedMedium === 'Select medium') {
-         this.isSelcetedMedium = true;
+         this.isSelcetedMedium = true
       }
       else {
-         this.isSelcetedMedium = false;
+         this.isSelcetedMedium = false
       }
    }
 
@@ -155,17 +155,51 @@ class ShareTravelInfo extends React.Component {
       if (this.assetQuantity <= 0) {
          this.isAssetsQuantityZero = false
       }
-      else if (this.from !== '' && this.toData !== '' && (this.date !== null || this.fromDateAndTime !== null) &&
-         this.assetQuantity > 0 && this.selectedMedium !== 'Select medium') {
+      else if (
+         this.from !== '' &&
+         this.toData !== '' &&
+         (this.date !== null || this.fromDateAndTime !== null) &&
+         this.assetQuantity > 0 &&
+         this.selectedMedium !== 'Select medium'
+      ) {
          alert('shareTravelInfo')
          console.log(this.assetQuantity, this.selectedMedium)
-         this.shareTravelInfo(this.from, this.toData, this.date, this.fromDateAndTime,
-            this.toDateAndTime, this.isFlexibleTimings, this.selectedMedium, this.assetQuantity)
+         this.shareTravelInfo(
+            this.from,
+            this.toData,
+            this.date,
+            this.fromDateAndTime,
+            this.toDateAndTime,
+            this.isFlexibleTimings,
+            this.selectedMedium,
+            this.assetQuantity
+         )
       }
    }
-   async shareTravelInfo(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, selectedMedium, assetQuantity) {
-      const { shareTravelInfoStore: { userRequest } } = this.props;
-      await userRequest(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, selectedMedium, assetQuantity);
+
+   async shareTravelInfo(
+      from,
+      toData,
+      date,
+      fromDateAndTime,
+      toDateAndTime,
+      isFlexibleTimings,
+      selectedMedium,
+      assetQuantity
+   ) {
+      const {
+         shareTravelInfoStore: { userRequest }
+      } = this.props
+      await userRequest(
+         from,
+         toData,
+         date,
+         fromDateAndTime,
+         toDateAndTime,
+         isFlexibleTimings,
+         selectedMedium,
+         assetQuantity
+      )
    }
 
    render() {
@@ -212,21 +246,41 @@ class ShareTravelInfo extends React.Component {
                   </DivWithFlexCol>
 
                   <DivWithFlexCol>
-                        {this.isFlexibleTimings?'':<DateAndTime>{StringsData.dateAndTime}<Requried>*</Requried></DateAndTime>}
-                        {this.isFlexibleTimings?
-                        <DateAndTimeCommonComponent 
-                        onChangeFromDateAndTime={this.onChangeFromDateAndTime}
-                        onChangeToDateAndTime={this.onChangeToDateAndTime}
-                        />:
-                        <InputField 
-                        onChangeInputText={this.onChangeDateAndTime}
-                        type="datetime-local" 
-                        placeholder="Date and Time"
-                        />}
+                     {this.isFlexibleTimings ? (
+                        ''
+                     ) : (
+                        <DateAndTime>
+                           {StringsData.dateAndTime}
+                           <Requried>*</Requried>
+                        </DateAndTime>
+                     )}
+                     {this.isFlexibleTimings ? (
+                        <DateAndTimeCommonComponent
+                           onChangeFromDateAndTime={
+                              this.onChangeFromDateAndTime
+                           }
+                           onChangeToDateAndTime={this.onChangeToDateAndTime}
+                        />
+                     ) : (
+                        <InputField
+                           onChangeInputText={this.onChangeDateAndTime}
+                           type='datetime-local'
+                           placeholder='Date and Time'
+                        />
+                     )}
                   </DivWithFlexCol>
-                  {this.isFlexibleTimings?this.isFromTimeChanged?<RequriedText>Required</RequriedText>:'':
-                  this.isTimeChanged?<RequriedText>Required</RequriedText>:''}
-                                 
+                  {this.isFlexibleTimings ? (
+                     this.isFromTimeChanged ? (
+                        <RequriedText>Required</RequriedText>
+                     ) : (
+                        ''
+                     )
+                  ) : this.isTimeChanged ? (
+                     <RequriedText>Required</RequriedText>
+                  ) : (
+                     ''
+                  )}
+
                   <DivForFlexibleTimings>
                      <CheckBox onChecked={this.onChecked} />
                      <FlexibleTimingsLabel>
@@ -239,12 +293,16 @@ class ShareTravelInfo extends React.Component {
                         {StringsData.travelMedium}
                         <Requried>*</Requried>
                      </TravelMedium>
-                     <SelectOptions 
-                     data={this.selectMediumList}
-                     onChangeValue={this.onChangeMedium}
-                     isValid={this.isSelcetedMedium}
+                     <SelectOptions
+                        data={this.selectMediumList}
+                        onChangeValue={this.onChangeMedium}
+                        isValid={this.isSelcetedMedium}
                      />
-                     {this.isSelcetedMedium?<RequriedText>Required</RequriedText>:''}
+                     {this.isSelcetedMedium ? (
+                        <RequriedText>Required</RequriedText>
+                     ) : (
+                        ''
+                     )}
                   </DivWithFlexCol>
 
                   <Div>

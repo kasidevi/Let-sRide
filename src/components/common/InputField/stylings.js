@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
-const Div = styled.div ``
-const InputTag = styled.input `
+const Div = styled.div``
+const InputTag = styled.input`
    width: 300px;
    height: 30px;
    border-radius: 2px;

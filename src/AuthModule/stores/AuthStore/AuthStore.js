@@ -4,8 +4,7 @@ import {
    API_FAILED,
    API_SUCCESS,
    API_FETCHING
-}
-from '@ib/api-constants'
+} from '@ib/api-constants'
 import { bindPromiseWithOnSuccess } from '@ib/mobx-promise'
 import { setAccessToken } from '../../../utils/StorageUtils'
 
@@ -18,7 +17,7 @@ class AuthStore {
    constructor(authService) {
       this.authService = authService
       this.init()
-      this.access_token = undefined;
+      this.access_token = undefined
    }
 
    @action.bound
@@ -32,7 +31,7 @@ class AuthStore {
    @action.bound
    setUserLogInAPIResponse(response) {
       setAccessToken(response.access_token)
-      this.access_token = response.access_token;
+      this.access_token = response.access_token
    }
 
    @action.bound

@@ -1,27 +1,32 @@
-import React from 'react';
+import React from 'react'
 
-import { Div, List, OrderedList } from './stylings';
+import { Div, List, OrderedList } from './stylings'
 
 class DropDown extends React.Component {
-    onChangeList = event => {
-        this.props.onRequest(event.target.value);
-    }
+   onChangeList = event => {
+      this.props.onRequest(event.target.value)
+   }
 
-    onChange = list => {
-        return this.props.data.map(list => (
-            <List id={Math.random()} key={Math.random()} onClick={this.onChangeList} value={list}>
+   onChange = list => {
+      return this.props.data.map(list => (
+         <List
+            id={Math.random()}
+            key={Math.random()}
+            onClick={this.onChangeList}
+            value={list}
+         >
             {list}
          </List>
-        ));
-    }
+      ))
+   }
 
-    render() {
-        return (
-            <Div>
+   render() {
+      return (
+         <Div>
             <OrderedList>{this.onChange()}</OrderedList>
          </Div>
-        );
-    }
+      )
+   }
 }
 
-export default DropDown;
+export default DropDown

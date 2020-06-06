@@ -1,0 +1,10 @@
+{
+    "source": "string",
+    "destination": "string",
+    "date_time": "string($date - time)",
+    "from_date_time": " string($date - time)",
+    "to_date_time ": "string($date - time)",
+    "is_flexible ": "boolean",
+    "no_of_seats": " integer",
+    "lugguage_quantity ": " integer"
+}

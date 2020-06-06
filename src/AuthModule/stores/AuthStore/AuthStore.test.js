@@ -4,8 +4,7 @@ import {
    API_FAILED,
    API_FETCHING,
    API_SUCCESS
-}
-from '@ib/api-constants'
+} from '@ib/api-constants'
 
 import AuthService from '../../services/index.api'
 import getUsersResponse from '../../fixtures/index.json'
@@ -32,7 +31,7 @@ describe('AuthStore tests', () => {
       authService.logInAPI = mockLogInAPI
    })
 
-   it('should test userLogInAPI success state', async() => {
+   it('should test userLogInAPI success state', async () => {
       const mockSuccessPromise = new Promise(function(resolve, reject) {
          resolve(getUsersResponse)
       })
@@ -44,7 +43,7 @@ describe('AuthStore tests', () => {
       expect(authStore.getUserLogInAPIStatus).toBe(API_SUCCESS)
    })
 
-   it('should test userLogInAPI failure state', async() => {
+   it('should test userLogInAPI failure state', async () => {
       const mockFailurePromise = new Promise(function(resolve, reject) {
          reject(getUsersResponse)
       }).catch(() => {})

@@ -1,2 +1,2 @@
-import { SelectOptions } from './SelectOptions';
-export default SelectOptions;
+import { SelectOptions } from './SelectOptions'
+export default SelectOptions

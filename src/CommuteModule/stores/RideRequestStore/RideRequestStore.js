@@ -15,15 +15,34 @@ class RideRequestStore {
    @observable rideRequestAPIService
    @observable access_token
    rideRequestService
+
    constructor(rideRequestService) {
       this.rideRequestService = rideRequestService
-      this.access_token = undefined;
+      this.access_token = undefined
       this.init()
    }
 
    @action.bound
-   userRequest(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, seatsCount, laguageQuantity) {
-      const requestPromise = this.rideRequestService.rideRequestAPI(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, seatsCount, laguageQuantity)
+   userRequest(
+      from,
+      toData,
+      date,
+      fromDateAndTime,
+      toDateAndTime,
+      isFlexibleTimings,
+      seatsCount,
+      laguageQuantity
+   ) {
+      const requestPromise = this.rideRequestService.rideRequestAPI(
+         from,
+         toData,
+         date,
+         fromDateAndTime,
+         toDateAndTime,
+         isFlexibleTimings,
+         seatsCount,
+         laguageQuantity
+      )
       return bindPromiseWithOnSuccess(requestPromise)
          .to(this.setRideRequestAPIStatus, this.setRideRequestAPIResponse)
          .catch(this.setRideRequestAPIError)
@@ -43,7 +62,6 @@ class RideRequestStore {
    @action.bound
    setRideRequestAPIStatus(apiStatus) {
       this.getRideRequestAPIStatus = apiStatus
-
    }
 
    @action

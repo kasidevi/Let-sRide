@@ -1,4 +1,5 @@
 import { create } from 'apisauce'
+
 import { networkCallWithApisauce } from '../../../utils/APIUtils'
 import { apiMethods } from '../../../constants/APIConstants'
 
@@ -6,11 +7,20 @@ class ShareRideService {
    apiMethods
    constructor() {
       this.api = create({
-         baseURL: 'https://f5d8ce6deab9.ngrok.io'
+         baseURL: 'https://9e243b1e341a.ngrok.io'
       })
    }
 
-   shareRideAPI(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, seatsCount, assetsQuantity) {
+   shareRideAPI(
+      from,
+      toData,
+      date,
+      fromDateAndTime,
+      toDateAndTime,
+      isFlexibleTimings,
+      seatsCount,
+      assetsQuantity
+   ) {
       const details = {
          source: from,
          destination: toData,
@@ -21,11 +31,14 @@ class ShareRideService {
          no_of_seats_available: seatsCount,
          assets_quantity: assetsQuantity
       }
+
       return networkCallWithApisauce(
          this.api,
-         '/api/lets_ride/share/ride/v1/', details,
+         '/api/lets_ride/share/ride/v1/',
+         details,
          apiMethods.post
       )
+
    }
 }
 

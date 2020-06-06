@@ -6,11 +6,20 @@ class RideRequestService {
    apiMethods
    constructor() {
       this.api = create({
-         baseURL: 'https://f5d8ce6deab9.ngrok.io'
+         baseURL: 'https://9e243b1e341a.ngrok.io'
       })
    }
 
-   rideRequestAPI(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, seatsCount, laguageQuantity) {
+   rideRequestAPI(
+      from,
+      toData,
+      date,
+      fromDateAndTime,
+      toDateAndTime,
+      isFlexibleTimings,
+      seatsCount,
+      laguageQuantity
+   ) {
       const details = {
          source: from,
          destination: toData,
@@ -23,7 +32,8 @@ class RideRequestService {
       }
       return networkCallWithApisauce(
          this.api,
-         '/api/lets_ride/request/ride/v1/', details,
+         '/api/lets_ride/request/ride/v1/',
+         details,
          apiMethods.post
       )
    }

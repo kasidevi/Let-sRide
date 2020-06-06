@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import tw from 'tailwind.macro'
+
 import {
    Typo32RubikRegular,
    Typo12HKGroteskSemiBoldSteel

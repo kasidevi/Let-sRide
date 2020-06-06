@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
-const Div = styled.div `
+const Div = styled.div`
    width: 100px;
    padding: 5px;
    cursor: default;
@@ -14,21 +14,21 @@ const Div = styled.div `
    justify-content: center;
    flex-wrap: wrap;
    align-items: center;
-`;
+`
 
-const List = styled.button `
+const List = styled.button`
    cursor: default;
-   color:grey;
+   color: grey;
    &:hover {
-        background-color: #e2e8f0;
-        color:black;
-        padding:2px;
-        border-radius:2px;
-      }
-`;
+      background-color: #e2e8f0;
+      color: black;
+      padding: 2px;
+      border-radius: 2px;
+   }
+`
 
-const OrderedList = styled.div `
+const OrderedList = styled.div`
    cursor: default;
-`;
+`
 
-export { Div, List, OrderedList };
+export { Div, List, OrderedList }

@@ -7,6 +7,7 @@ import {
 }
 from '@ib/api-constants'
 import { bindPromiseWithOnSuccess } from '@ib/mobx-promise'
+
 import { setAccessToken } from '../../../utils/StorageUtils'
 
 class ShareTravelInfoStore {
@@ -20,9 +21,26 @@ class ShareTravelInfoStore {
    }
 
    @action.bound
-   userRequest(from, toData, date, fromDateAndTime, toDateAndTime, isFlexibleTimings, selectedMedium, assetQuantity) {
-      const requestPromise = this.shareTravelInfoService.shareTravelInfoAPI(from, toData, date, fromDateAndTime,
-         toDateAndTime, isFlexibleTimings, selectedMedium, assetQuantity)
+   userRequest(
+      from,
+      toData,
+      date,
+      fromDateAndTime,
+      toDateAndTime,
+      isFlexibleTimings,
+      selectedMedium,
+      assetQuantity
+   ) {
+      const requestPromise = this.shareTravelInfoService.shareTravelInfoAPI(
+         from,
+         toData,
+         date,
+         fromDateAndTime,
+         toDateAndTime,
+         isFlexibleTimings,
+         selectedMedium,
+         assetQuantity
+      )
       return bindPromiseWithOnSuccess(requestPromise)
          .to(
             this.setShareTravelInfoAPIStatus,

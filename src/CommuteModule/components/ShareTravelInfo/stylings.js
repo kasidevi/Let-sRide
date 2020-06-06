@@ -3,16 +3,15 @@ import styled from '@emotion/styled'
 import {
    Typo12HKGroteskSemiBoldSteel,
    Typo20DarkBlueGreyHKGrotestBold
-}
-from '../../../styleGuide/Typos'
+} from '../../../styleGuide/Typos'
 
-const MainDiv = styled.div `
+const MainDiv = styled.div`
    background-color: #d7dfe9;
    padding-top: 100px;
    padding-bottom: 100px;
 `
 
-const ShareTravelInfoFrom = styled.div `
+const ShareTravelInfoFrom = styled.div`
    padding-top: 30px;
    padding-bottom: 30px;
    width: 400px;
@@ -27,19 +26,19 @@ const ShareTravelInfoFrom = styled.div `
    margin-right: auto;
 `
 
-const ShareTravelInfoFromBody = styled.div `
+const ShareTravelInfoFromBody = styled.div`
    margin-left: auto;
    margin-right: auto;
 `
 
-const DivForFlexibleTimings = styled.div `
+const DivForFlexibleTimings = styled.div`
    width: auto;
    display: flex;
    flex-direction: row;
    padding-bottom: 10px;
 `
 
-const Div = styled.div `
+const Div = styled.div`
    width: auto;
    display: flex;
    flex-direction: row;
@@ -48,12 +47,12 @@ const Div = styled.div `
    align-items: center;
 `
 
-const DivWithFlexCol = styled.div `
+const DivWithFlexCol = styled.div`
    padding-top: 10px;
    padding-bottom: 10px;
 `
 
-const FlexibleTimingsLabel = styled.label `
+const FlexibleTimingsLabel = styled.label`
    font-family: HKGrotesk;
    font-size: 12px;
    font-weight: 600;
@@ -64,12 +63,12 @@ const FlexibleTimingsLabel = styled.label `
    color: #7e858e;
    text-align: center;
 `
-const Requried = styled.span `
+const Requried = styled.span`
    color: red;
    padding-right: 10px;
 `
 
-const RequriedText = styled.p `
+const RequriedText = styled.p`
    color: red;
    font-size: 10px;
 `
@@ -96,6 +95,5 @@ export {
    To,
    DateAndTime,
    TravelMedium,
-   AssetsQuantity,
-
+   AssetsQuantity
 }

@@ -7,54 +7,54 @@ import {
 }
 from '@ib/api-constants'
 
-import AuthService from '../../services/index.api'
-import getUsersResponse from '../../fixtures/index.json'
-import AuthStore from '.'
+import RideRequestService from '../../services/RideRequestServices/index.api'
+import getUsersResponse from '../../services/RideRequestServices/index.fixtures.json'
+import RideRequestStore from '.'
 
-describe('AuthStore tests', () => {
-   let authService
-   let authStore
+describe('RideRequestStore tests', () => {
+   let rideRequestService
+   let rideRequestStore
 
    beforeEach(() => {
-      authService = new AuthService()
-      authStore = new AuthStore(authService)
+      rideRequestService = new RideRequestService()
+      rideRequestStore = new RideRequestStore(rideRequestService)
    })
 
-   it('should test intialising auth store', () => {
-      expect(authStore.getUserLogInAPIStatus).toBe(API_INITIAL)
-      expect(authStore.getUserLogInAPIError).toBe(null)
+   it('should test intialising ride request  store', () => {
+      expect(rideRequestStore.getRideRequestAPIStatus).toBe(API_INITIAL)
+      expect(rideRequestStore.getRideRequestAPIError).toBe(null)
    })
 
-   it('should test userLogInAPI data fetching state', () => {
+   it('should test ride request data fetching state', () => {
       const mockLoadingPromise = new Promise(function(resolve, reject) {})
-      const mockLogInAPI = jest.fn()
-      mockLogInAPI.mockReturnValue(mockLoadingPromise)
-      authService.logInAPI = mockLogInAPI
+      const mockRideRequestAPI = jest.fn()
+      mockRideRequestAPI.mockReturnValue(mockLoadingPromise)
+      rideRequestService.rideRequestAPI = mockRideRequestAPI
    })
 
-   it('should test userLogInAPI success state', async() => {
+   it('should test ride request success state', async() => {
       const mockSuccessPromise = new Promise(function(resolve, reject) {
          resolve(getUsersResponse)
       })
-      const mockLogInAPI = jest.fn()
-      mockLogInAPI.mockReturnValue(mockSuccessPromise)
-      authService.logInAPI = mockLogInAPI
+      const mockRideRequestAPI = jest.fn()
+      mockRideRequestAPI.mockReturnValue(mockSuccessPromise)
+      rideRequestService.rideRequestAPI = mockRideRequestAPI
 
-      await authStore.userLogIn()
-      expect(authStore.getUserLogInAPIStatus).toBe(API_SUCCESS)
+      await rideRequestStore.userRequest()
+      expect(rideRequestStore.getRideRequestAPIStatus).toBe(API_SUCCESS)
    })
 
-   it('should test userLogInAPI failure state', async() => {
+   it('should test ride request failure state', async() => {
       const mockFailurePromise = new Promise(function(resolve, reject) {
          reject(getUsersResponse)
       }).catch(() => {})
-      const mockLogInAPI = jest.fn()
-      mockLogInAPI.mockReturnValue(mockFailurePromise)
-      authService.logInAPI = mockLogInAPI
+      const mockRideRequestAPI = jest.fn()
+      mockRideRequestAPI.mockReturnValue(mockFailurePromise)
+      rideRequestService.rideRequestAPI = mockRideRequestAPI
 
       mockFailurePromise.catch(e => {
-         expect(authStore.getUserLogInAPIStatus).toBe(API_FAILED)
-         expect(authStore.getUserLogInAPIError).toBe('error')
+         expect(rideRequestStore.getRideRequestAPIStatus).toBe(API_FAILED)
+         expect(rideRequestStore.getRideRequestAPIError).toBe('error')
       })
    })
 })

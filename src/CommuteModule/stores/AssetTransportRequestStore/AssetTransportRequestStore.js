@@ -4,8 +4,10 @@ import {
    API_FAILED,
    API_SUCCESS,
    API_FETCHING
-} from '@ib/api-constants'
+}
+from '@ib/api-constants'
 import { bindPromiseWithOnSuccess } from '@ib/mobx-promise'
+
 import { setAccessToken } from '../../../utils/StorageUtils'
 
 class AssetTransportRequestStore {
@@ -19,8 +21,10 @@ class AssetTransportRequestStore {
    }
 
    @action.bound
-   userRequest() {
-      const requestPromise = this.assetTransportRequestService.requestAPI()
+   userRequest(from, toData, date, fromDateAndTime,
+      toDateAndTime, isFlexibleTimings, assetsCount, assetSenstiveType, deliverdData) {
+      const requestPromise = this.assetTransportRequestService.assetTransportRequestAPI(from, toData, date, fromDateAndTime,
+         toDateAndTime, isFlexibleTimings, assetsCount, assetSenstiveType, deliverdData)
       return bindPromiseWithOnSuccess(requestPromise)
          .to(
             this.setAssetTransportRequestAPIStatus,
