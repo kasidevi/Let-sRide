@@ -3,7 +3,7 @@ import React from 'react'
 import { Div, Select } from './stylings'
 
 class SelectOptions extends React.Component {
-   onChange = event => {
+   onChangeFunc = event => {
       this.props.onChangeValue(event.target.value)
    }
 
@@ -11,9 +11,9 @@ class SelectOptions extends React.Component {
       const { data } = this.props
       return (
          <Div>
-            <Select onChange={this.onChange}>
+            <Select onChange={this.onChangeFunc}>
                {data.map(list => (
-                  <option key={Math.random()} value={list}>
+                  <option key={list} value={list}>
                      {list}
                   </option>
                ))}

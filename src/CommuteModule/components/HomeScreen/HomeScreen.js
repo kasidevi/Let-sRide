@@ -55,7 +55,7 @@ class HomeScreen extends React.Component {
       else if (this.request === 'Asset Transport') {
          this.component = 'AssetTransportRequest'
       }
-      console.log('onChangeRequest', this.request, this.component)
+
    }
 
    onChangeShare = event => {
@@ -70,19 +70,25 @@ class HomeScreen extends React.Component {
 
    componentRender = (component) => {
       console.log('switch', component)
+
       switch (component) {
+
          case component === 'RideRequest':
-            console.log('riderequest')
+            console.log('RideRequest')
             return <RideRequest />
+
          case component === 'AssetTransportRequest':
-            console.log('assetTransportRequest');
+            console.log('AssetTransportRequest');
             <AssetTransportRequest />
+
          case component === 'ShareRide':
-            console.log('shareride')
+            console.log('ShareRide')
             return <ShareRide />
+
          case component === 'ShareTravelInfo':
-            console.log('shareTravel')
+            console.log('ShareTravelInfo')
             return <ShareTravelInfo />
+
          default:
             console.log('default')
             return <RideRequest />

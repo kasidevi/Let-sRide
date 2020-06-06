@@ -4,6 +4,7 @@ import { observable } from 'mobx'
 import LoginPage from '../../components/LoginPage/index'
 import { withRouter } from 'react-router'
 
+
 @inject('authStore')
 @observer
 class LoginPageRoute extends React.Component {
@@ -86,6 +87,7 @@ class LoginPageRoute extends React.Component {
             password={this.password}
             isUserNameEmpty={this.isUserNameEmpty}
             isPassWordEmpty={this.isPassWordEmpty}
+            errorMeassageBackend={this.props.authStore.getUserLogInAPIError}
          />
       )
    }

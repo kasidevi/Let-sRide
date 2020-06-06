@@ -4,7 +4,8 @@ import {
    API_FAILED,
    API_SUCCESS,
    API_FETCHING
-} from '@ib/api-constants'
+}
+from '@ib/api-constants'
 import { bindPromiseWithOnSuccess } from '@ib/mobx-promise'
 import { setAccessToken } from '../../../utils/StorageUtils'
 

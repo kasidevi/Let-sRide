@@ -5,6 +5,7 @@ import { observer } from 'mobx-react'
 import InputField from '../../../components/common/InputField/index'
 import Button from '../../../components/common/Buttons/index'
 
+import { getUserDisplayableErrorMessage } from '../../../utils/APIUtils'
 import StringsData from '../../i18n/string.json'
 
 import {
@@ -18,7 +19,8 @@ import {
    ErrorMessage,
    DontHaveAccount,
    AnchorTag
-} from './stylings'
+}
+from './stylings'
 
 @observer
 class LoginPage extends React.Component {
@@ -78,7 +80,8 @@ class LoginPage extends React.Component {
                   onSubmitButton={onClickLogin}
                   buttonName={StringsData.login}
                />
-
+               <ErrorMessage>{getUserDisplayableErrorMessage(this.props.errorMeassageBackend)}</ErrorMessage>
+               
                <DontHaveAccount>
                   {StringsData.dontHaveAnAccount}{' '}
                   <AnchorTag>{StringsData.signUp}</AnchorTag>
